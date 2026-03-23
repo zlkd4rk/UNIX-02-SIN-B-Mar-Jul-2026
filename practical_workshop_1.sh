@@ -34,3 +34,5 @@ gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt
 
 #with the file sign use 
 gpg --verify xxxxxxxxxxxx.txt
+
+gpg --edit-key 
