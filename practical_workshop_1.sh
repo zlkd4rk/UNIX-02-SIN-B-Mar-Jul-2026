@@ -7,6 +7,8 @@ gpg --list-keys
 gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc #export my public keys 
 ls 
 cat mi_llave_publica.asc
-gpg -list-secret-keys --keyid-format=long  #list abour private keys 
+gpg -list-secret-keys --keyid-format=long  #list about private keys 
 gpg --armor --export-secret-key 9CE2A432BF706712
 #armor 
+gpg -armor -export-secret-keys
+gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc
