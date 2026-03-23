@@ -30,3 +30,7 @@ gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570
 gpg --decrypt Holaandrestilinjaja.txt 
 #this decrypt the message, before I save hes public key, soy watch this massage is easy, i guess.
 #he send me a message with the text "hola andres"
+gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt 
+
+#with the file sign use 
+gpg --verify xxxxxxxxxxxx.txt
