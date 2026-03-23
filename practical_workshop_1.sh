@@ -23,4 +23,6 @@ echo "tengo mucho sueño,:V" > doc_no_cifrado.txt #create a file to we need to e
 #> : filter to .txt
 
 gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570571C1279AE9727 doc_no_cifrado.txt 
+#create a new file with the new you prefer, this use the last file named "doc_no_cifrado.txt" wiht the original message,
+#when you create this file and open it, show a lot of characters, this characters the humans dont undertands. 
 
