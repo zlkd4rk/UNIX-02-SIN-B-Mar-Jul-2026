@@ -26,3 +26,7 @@ gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570
 #create a new file with the new you prefer, this use the last file named "doc_no_cifrado.txt" wiht the original message,
 #when you create this file and open it, show a lot of characters, this characters the humans dont undertands. 
 
+#we need to known the message so we can use this command to decrypt the massage.
+gpg --decrypt Holaandrestilinjaja.txt 
+#this decrypt the message, before I save hes public key, soy watch this massage is easy, i guess.
+#he send me a message with the text "hola andres"
