@@ -10,4 +10,8 @@ cat mi_llave_publica.asc
 gpg -list-secret-keys --keyid-format=long  #list about private keys 
 gpg --armor --export-secret-key 9CE2A432BF706712 # we can use it to list our pair of keys and can execute:
 gpg -armor --export-secret-keys # 
+
 gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc #repeat the process to create a file with the public key
+#With this public key, we need to send to our pair, in codespaces create a file o copy the file into de machine, so we need to export this file/key to save it
+#if it done correctly we can use gpg --list-keys and this show my personal key(hash) and the other key of my pair. 
+
