@@ -22,4 +22,5 @@ echo "tengo mucho sueño,:V" > doc_no_cifrado.txt #create a file to we need to e
 #echo: we can use it to show something into the terminal
 #> : filter to .txt
 
+gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570571C1279AE9727 doc_no_cifrado.txt 
 
