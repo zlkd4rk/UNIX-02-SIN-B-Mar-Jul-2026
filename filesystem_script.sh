@@ -18,3 +18,6 @@ saludo_bin #execute
 ls -i #List of files with each "inode" number (unique identificator of each file)
 ls -f #List of files with non order. 
 pwd #(Print wordl directory), print the directory where I am wornking
+
+echo "Hola" > test.txt #Use echo to can show it into the terminal, and the message in "" put in a .txt file.
+stat test.txt #provides a snapshot of the file's metadata.
