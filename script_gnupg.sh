@@ -50,7 +50,10 @@ gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt
 #so, Gemini says enter the standard command and, at the end, add the name of the original file sent by your partner
 #this show the same message for the good signature. 
 
+#Block E 
+gpg --edit-key yumbilloariel@gmail.com #Using this command show a message to edit partner key, so write trust, and show a 5 levels of trust.
+#for this case type 4 and enter, this save the changes and you can leave using Q/q
+# --> (trust) ----> 4=I trust ultimately ----> q/Q(Quit)"
+gpg --sign-key yumbilloariel@gmail.com #This command use own private key to put a digital stamp in the partner public key. This prove you trust the key is the real key of your partner.
+gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt #If you done this the last step correctly, when you try to verify the sign on any file, the message of warning dont show up.
 
-
-
-gpg --edit-key 
