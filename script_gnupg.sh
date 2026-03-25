@@ -30,13 +30,8 @@ gpg --decrypt Holaandrestilinjaja.txt #This command decrypt the message
 #In that case my partner send a greet ("Hola Aandres") 
 #The message appear in the terminal and all the information about my key.
 
-
-
-gpg --armor --export-secret-key 9CE2A432BF706712 # we can use it to list our pair of keys and can execute:
-gpg -armor --export-secret-keys # 
-
-
-
+gpg --armor --export-secret-key 10764728C8B9C7F941FCF5F49CE2A432BF706712
+ 
 #Block D
 gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt # Genrate a digital sign, so this make possible to the other person read the message and include a BGP sign to prove the authenticity.
 gpg --output doc_no_cifrado_binario.txt --sign doc_no_cifrado.txt #Generate a new file with the sign, the diffrence is in bynary so most of the text/characters are no readable. 
@@ -56,4 +51,14 @@ gpg --edit-key yumbilloariel@gmail.com #Using this command show a message to edi
 # --> (trust) ----> 4=I trust ultimately ----> q/Q(Quit)"
 gpg --sign-key yumbilloariel@gmail.com #This command use own private key to put a digital stamp in the partner public key. This prove you trust the key is the real key of your partner.
 gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt #If you done this the last step correctly, when you try to verify the sign on any file, the message of warning dont show up.
+
+#Block F
+gpg --encrypt --sign --pinentry-mode loopback --recipient yumbilloariel@gmail.com doc_no_cifrado.txt #This command encrypt the message and also with --sign add a digitla sign using my private key
+#When I try to run the command "gpg --encrypt --sign -r xxxxxx@xx" says the monitor/screen is to small.
+#So I asked a gemini for a solution, using the command --pinentry-mode loopback, so instead of show a pop up in other window gpg askme my safephrase/passwaord in the terminal.
+gpg --decrypt mensaje_con_todonew.gpg #This command decrypt the message, at the moment when you execute the command you can see the secret message and also says the signature is Good and is from Ariel Yumbillo (my partner).
+cat mensaje_con_todonew.gpg #Cat shows the content of the file in the terminal, but the file is in binary, so shows/print a lot of unreadable characters. 
+
+
+
 
