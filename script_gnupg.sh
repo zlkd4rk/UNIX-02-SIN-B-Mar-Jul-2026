@@ -7,9 +7,16 @@ gpg --full-generate-key #Use it to create a key, and create a single one or a pa
 gpg --list-keys #Shows a list of keys, includes own keys and information like the hash, date of expiration.and more.
 gpg --list-secret-keys --keyid-format=long  #Show the private keys (sec), and relevant information 
 
-gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc #export my public keys 
-ls 
-cat mi_llave_publica.asc
+#Block B
+gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica_new.asc #export my public keys 
+#this create a file with the name "mi_llave_publica_new.asc", with the extension.asc make yhis file readable for the human eyes. 
+gpg --import Ariel_public_key.asc #Use this command to export the key. 
+#If you want to sent a encrypted message you need to add your partner public key, so with this command you export hes key.
+#You must export the file directly to your codespace and import it, if you donde correctly you can comprobate this using --lsit-keys 
+ls #extra command to see all the files in the machine and see the file with the key create correctly
+cat mi_llave_publica_new.asc #another extra command to see the file into the terminal
+gpg --list-keys #this commands show again, but you can see your public key and your partner public key, with all the essential information. 
+
 
 gpg --armor --export-secret-key 9CE2A432BF706712 # we can use it to list our pair of keys and can execute:
 gpg -armor --export-secret-keys # 
