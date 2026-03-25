@@ -17,29 +17,27 @@ ls #extra command to see all the files in the machine and see the file with the 
 cat mi_llave_publica_new.asc #another extra command to see the file into the terminal
 gpg --list-keys #this commands show again, but you can see your public key and your partner public key, with all the essential information. 
 
+#Block C
+echo "tengo mucho sueño,:V" > doc_no_cifrado.txt #create a file with the secret message. this message must be encrypted.
+#echo: we can use it to show something into the terminal
+#> : filter to .txt
+gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570571C1279AE9727 doc_no_cifrado.txt 
+#create a new file with the name you prefer, this use the last file named "doc_no_cifrado.txt" wiht the original message,
+#when you create this file and open it, show a lot of characters, this characters at simple view humans dont undertands.
+#This file sahre it to your partner and both decrypt themessage.
+gpg --decrypt Holaandrestilinjaja.txt #This command decrypt the message
+#When you try to execute the command to decrypt the message show a rectangular, you need to put your password/safe word to complete the decrypt 
+#In that case my partner send a greet ("Hola Aandres") 
+#The message appear in the terminal and all the information about my key.
+
+
 
 gpg --armor --export-secret-key 9CE2A432BF706712 # we can use it to list our pair of keys and can execute:
 gpg -armor --export-secret-keys # 
 
-gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc #repeat the process to create a file with the public key
-#With this public key, we need to send it to my friend, in codespaces create a file or copy the file into de machine, so we need to export this file/key to save it
-gpg --import Ariel_public_key.asc #Use this command to export the key. 
-#if it done correctly we can use gpg --list-keys and this show my personal public key(hash) and the other key of my partner.
-gpg --list-keys #this shows m key and my friend key  
 
-echo "tengo mucho sueño,:V" > doc_no_cifrado.txt #create a file to we need to encryprt with a "secret" message
 
-#echo: we can use it to show something into the terminal
-#> : filter to .txt
 
-gpg --output holaarieltilin.txt --encrypt --recipient 042DA1A9783F14852956063570571C1279AE9727 doc_no_cifrado.txt 
-#create a new file with the new you prefer, this use the last file named "doc_no_cifrado.txt" wiht the original message,
-#when you create this file and open it, show a lot of characters, this characters the humans dont undertands. 
-
-#we need to known the message so we can use this command to decrypt the massage.
-gpg --decrypt Holaandrestilinjaja.txt 
-#this decrypt the message, before I save hes public key, soy watch this massage is easy, i guess.
-#he send me a message with the text "hola andres"
 gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt 
 
 #with the file sign use 
