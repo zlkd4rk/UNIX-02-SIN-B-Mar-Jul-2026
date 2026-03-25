@@ -37,10 +37,20 @@ gpg -armor --export-secret-keys #
 
 
 
+#Block D
+gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt # Genrate a digital sign, so this make possible to the other person read the message and include a BGP sign to prove the authenticity.
+gpg --output doc_no_cifrado_binario.txt --sign doc_no_cifrado.txt #Generate a new file with the sign, the diffrence is in bynary so most of the text/characters are no readable. 
+gpg --output doc_no_cifrado_firma_separada.sig --detach-sign doc_no_cifrado.txt #This create a file only with the sign ignoring the secret message 
+gpg --verify docfirmadoariel.txt 
+#First, verify the signed file. A message will pop up saying 'Good signature', which indicates the signature is valid. However, you will see a warning stating the key is not certified, meaning there is no proof that the signature actually belongs to the owner
+gpg --verify docfirmadobinarioari.txt
+#Second, we must verify the binary sign file with unreadable characters, show the same message like the previously file. 
+gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt
+#And the final file, the only contain the sign in a .sig file, with my partner use Gemini for help because at the moment to execute the command show a error with the hash and no data found
+#so, Gemini says enter the standard command and, at the end, add the name of the original file sent by your partner
+#this show the same message for the good signature. 
 
-gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt 
 
-#with the file sign use 
-gpg --verify xxxxxxxxxxxx.txt
+
 
 gpg --edit-key 
