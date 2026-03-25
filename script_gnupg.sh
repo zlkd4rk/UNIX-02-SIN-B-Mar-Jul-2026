@@ -1,6 +1,9 @@
-uname -a
-which gpg 
-gpg --version
+#Block A - envairoment preparation 
+#With these 3 commands I can see the information of the environment in which I am going to work
+uname -a #This works like a identification document with -a (all]) shows all the information that the command can show 
+which gpg #Shows the location of a executable program 
+gpg --version #Show all the information about gpg like libraries, version,where the files are saved.
+
 #RSA 4096, universal y compatible 
 gpg --full-generate-key
 gpg --list-keys
