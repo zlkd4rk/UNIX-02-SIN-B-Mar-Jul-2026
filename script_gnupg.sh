@@ -3,14 +3,14 @@
 uname -a #This works like a identification document with -a (all]) shows all the information that the command can show 
 which gpg #Shows the location of a executable program 
 gpg --version #Show all the information about gpg like libraries, version,where the files are saved.
+gpg --full-generate-key #Use it to create a key, and create a single one or a pair of it.
+gpg --list-keys #Shows a list of keys, includes own keys and information like the hash, date of expiration.and more.
+gpg --list-secret-keys --keyid-format=long  #Show the private keys (sec), and relevant information 
 
-#RSA 4096, universal y compatible 
-gpg --full-generate-key
-gpg --list-keys
 gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica.asc #export my public keys 
 ls 
 cat mi_llave_publica.asc
-gpg -list-secret-keys --keyid-format=long  #list about private keys 
+
 gpg --armor --export-secret-key 9CE2A432BF706712 # we can use it to list our pair of keys and can execute:
 gpg -armor --export-secret-keys # 
 
