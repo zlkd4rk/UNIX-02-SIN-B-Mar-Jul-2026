@@ -1,4 +1,4 @@
-#Block A - envairoment preparation 
+#Block A - Envairoment preparation 
 #With these 3 commands I can see the information of the environment in which I am going to work
 uname -a #This works like a identification document with -a (all]) shows all the information that the command can show 
 which gpg #Shows the location of a executable program 
@@ -7,7 +7,7 @@ gpg --full-generate-key #Use it to create a key, and create a single one or a pa
 gpg --list-keys #Shows a list of keys, includes own keys and information like the hash, date of expiration.and more.
 gpg --list-secret-keys --keyid-format=long  #Show the private keys (sec), and relevant information 
 
-#Block B
+#Block B - Public key exchange
 gpg --armor --export boldstepandrex648@gmail.com > mi_llave_publica_new.asc #export my public keys 
 #this create a file with the name "mi_llave_publica_new.asc", with the extension.asc make yhis file readable for the human eyes. 
 gpg --import Ariel_public_key.asc #Use this command to export the key. 
@@ -17,7 +17,7 @@ ls #extra command to see all the files in the machine and see the file with the 
 cat mi_llave_publica_new.asc #another extra command to see the file into the terminal
 gpg --list-keys #this commands show again, but you can see your public key and your partner public key, with all the essential information. 
 
-#Block C
+#Block C - Encryption and decryption
 echo "tengo mucho sueño,:V" > doc_no_cifrado.txt #create a file with the secret message. this message must be encrypted.
 #echo: we can use it to show something into the terminal
 #> : filter to .txt
@@ -32,7 +32,7 @@ gpg --decrypt Holaandrestilinjaja.txt #This command decrypt the message
 
 gpg --armor --export-secret-key 10764728C8B9C7F941FCF5F49CE2A432BF706712
  
-#Block D
+#Block D -Document signing
 gpg --output doc_no_cifrado_firmado.txt --clearsign doc_no_cifrado.txt # Genrate a digital sign, so this make possible to the other person read the message and include a BGP sign to prove the authenticity.
 gpg --output doc_no_cifrado_binario.txt --sign doc_no_cifrado.txt #Generate a new file with the sign, the diffrence is in bynary so most of the text/characters are no readable. 
 gpg --output doc_no_cifrado_firma_separada.sig --detach-sign doc_no_cifrado.txt #This create a file only with the sign ignoring the secret message 
@@ -45,14 +45,14 @@ gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt
 #so, Gemini says enter the standard command and, at the end, add the name of the original file sent by your partner
 #this show the same message for the good signature. 
 
-#Block E 
+#Block E - Web of Trust
 gpg --edit-key yumbilloariel@gmail.com #Using this command show a message to edit partner key, so write trust, and show a 5 levels of trust.
 #for this case type 4 and enter, this save the changes and you can leave using Q/q
 # --> (trust) ----> 4=I trust ultimately ----> q/Q(Quit)"
 gpg --sign-key yumbilloariel@gmail.com #This command use own private key to put a digital stamp in the partner public key. This prove you trust the key is the real key of your partner.
 gpg --verify docfirmaseparadaari.sig doc_no_cifradoariel.txt #If you done this the last step correctly, when you try to verify the sign on any file, the message of warning dont show up.
 
-#Block F
+#Block F - Simultaneous encryption and signing
 gpg --encrypt --sign --pinentry-mode loopback --recipient yumbilloariel@gmail.com doc_no_cifrado.txt #This command encrypt the message and also with --sign add a digitla sign using my private key
 #When I try to run the command "gpg --encrypt --sign -r xxxxxx@xx" says the monitor/screen is to small.
 #So I asked a gemini for a solution, using the command --pinentry-mode loopback, so instead of show a pop up in other window gpg askme my safephrase/passwaord in the terminal.
