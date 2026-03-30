@@ -4,5 +4,9 @@ sudo apt install parted #This command performs the retrieval, dependency resolut
 #Parted (Partition Editor) is a library and command-line front-end designed for manipulating partition tables and storage structures on block devices.
 sudo parted -l && echo -e "\n---\n" && lsblk -f && echo -e 
 #&& only is the last command is true execute the next command (AND gate, logic multiplication).
+#Used to determine if your computer booted using the modern UEFI interface or the legacy BIOS.
+lsblk -f 
 [ -d/sys/firmware/efi ] && echo "EUFI" || echo "BIOS"
 
+echo "esto un archivo" > archivo.txt
+stat archivo.txt
