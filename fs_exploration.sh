@@ -5,10 +5,9 @@ sudo apt install parted #This command performs the retrieval, dependency resolut
 sudo parted -l && echo -e "\n---\n" && lsblk -f && echo -e 
 #&& only is the last command is true execute the next command (AND gate, logic multiplication).
 #Used to determine if your computer booted using the modern UEFI interface or the legacy BIOS.
-lsblk -f 
 [ -d/sys/firmware/efi ] && echo "EUFI" || echo "BIOS"
 
 echo "esto un archivo" > archivo.txt
-#In a txt file save the message "esto es un archivo", and use echo to prnt ina the terminal 
+#In a txt file save the message "esto es un archivo", and use echo to print in to the terminal, > use it to save the message into a txt file.
 stat archivo.txt
-#This use to see all the inforamtion about, 
+#This use to see all the inforamtion about this file, like the inode of the file, metadada like date of modification, the size of the file and the amount of the blocks the file use.
