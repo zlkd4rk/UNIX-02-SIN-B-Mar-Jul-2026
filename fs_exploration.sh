@@ -9,4 +9,6 @@ lsblk -f
 [ -d/sys/firmware/efi ] && echo "EUFI" || echo "BIOS"
 
 echo "esto un archivo" > archivo.txt
+#In a txt file save the message "esto es un archivo", and use echo to prnt ina the terminal 
 stat archivo.txt
+#This use to see all the inforamtion about, 
