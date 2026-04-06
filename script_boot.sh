@@ -36,3 +36,9 @@ ls -l #Show the list in a long format
 ls -la # Includes the hide files (. and ..).
 ls -lh #(h= human readable).
 ls -lt #When the file have a modification 
+
+ls / #Show the root directory.
+ls /etc | head -20 #list to the directory /etc but with the pipeline filter the actions and show only the fisrt 20 lines with head.
+ls /dev | head -20 #Same like the last one but in the /dev directory.
+          tail #show the last 20 lines
+          
