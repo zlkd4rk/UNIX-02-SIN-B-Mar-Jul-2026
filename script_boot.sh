@@ -27,5 +27,12 @@ Change: 2026-04-06 12:33:51.818368401 +0000
 
 mkdir -p /tmp/prueba/sub1 /tmp/prueba/sub2 #create more than one directorys at the same time.
 stat /tmp/prueba #see all the medata
-man mkdir
+man mkdir #Manual of mkdir command.
 
+pwd #Print working directory, wher i am working
+whoami #The user a login (codesapce)
+ls #List only the names of files and folders
+ls -l #Show the list in a long format
+ls -la # Includes the hide files (. and ..).
+ls -lh #(h= human readable).
+ls -lt #When the file have a modification 
