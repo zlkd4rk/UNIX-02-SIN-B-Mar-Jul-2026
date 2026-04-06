@@ -24,3 +24,8 @@ Access: 2026-04-06 12:34:47.154366038 +0000
 Modify: 2026-04-06 12:33:51.818368401 +0000
 Change: 2026-04-06 12:33:51.818368401 +0000
  Birth: 2026-04-06 12:33:51.818368401 +0000
+
+mkdir -p /tmp/prueba/sub1 /tmp/prueba/sub2 #create more than one directorys at the same time.
+stat /tmp/prueba #see all the medata
+man mkdir
+
