@@ -16,9 +16,14 @@ syslinux - el bootloader
 dosfstools - para crear el filesystem FAT
 qemu-system-x86 - para probar la imagen sin necesidad de hardware real
 
+Compiling the Linux kernel
 git clone --depth 1 https://github.com/torvalds/linux.git
 cd linux
 make  menuconfig 
 make -j 2
 
-bzImage is ready -para ver si esta correcto
+bzImage is ready - This indicate the kernel is ready. 
+
+ I forgot to do a commit in the wednesday class cuz i repeat the procees to compile the limux kernel and worried about the review of the project. Sorry.
+
+
