@@ -12,7 +12,14 @@ Step 2.- Install dependencies
 
 'sudo apt upgrade' //Install the latest versions of all the packages you already have on your system.
 
-'sudo apt install -y git vim make gcc libncurses-dev flex bison bc cpio libelf-dev libssl-dev syslinux dosfstools qemu-system-x86'  //Install new commands, with the parameter -y to respond yes for every questions.  git: Use it to clone the source code of ptojects. Vim: Text editor direct in the terminal. make: Tool to automate the compilation of programs that read a file called Makefile. gcc: Compiler, essential to convert code into a executable binary. libncurses-dev: Library to create visual interfaces based in text. flex/bison: Lexical and syntactic analyzer generators bc:Calculator for the line of commands. cpio: Tool for archiving files  libelf-dev: Library for handling ELF files  libssl-dev: SSL/TLS security headers.
+'sudo apt install -y git vim make gcc libncurses-dev flex bison bc cpio libelf-dev libssl-dev syslinux dosfstools qemu-system-x86'  //Install new commands, with the parameter -y to respond yes for every questions.  
+git: Use it to clone the source code of ptojects. Vim: Text editor direct in the terminal. 
+make: Tool to automate the compilation of programs that read a file called Makefile. 
+gcc: Compiler, essential to convert code into a executable binary. libncurses-dev: Library to create visual interfaces based in text. flex/bison: Lexical and syntactic analyzer generators 
+bc:Calculator for the line of commands. 
+cpio: Tool for archiving files  
+libelf-dev: Library for handling ELF files 
+libssl-dev: SSL/TLS security headers.
 
 What is each package for?
 gcc, make - compilación del kernel y BusyBox
@@ -25,18 +32,27 @@ dosfstools - para crear el filesystem FAT
 qemu-system-x86 - para probar la imagen sin necesidad de hardware real
 
 Step 3.-Compiling the Linux kernel
-git clone --depth 1 https://github.com/torvalds/linux.git // 
-cd linux //
-make  menuconfig //
-make -j 2 //
+git clone --depth 1 https://github.com/torvalds/linux.git // Copy the repository of Linux in Github; --depth 1, --depth 1 it's a trick to download the latest kernel version instead of downloading all the changes since 1991.
+cd linux // Change direcory to the new folder and work with the main soruce
+make  menuconfig // Mark 64-bit kernel --> exit --> save configuration
+make -j 2 // Start converting the source code into a machine lenguaje. Only with 2 cores
 
 bzImage is ready - This indicate the kernel is ready. 
 
+sudo mkdir /boot-files //Create a directory called /boot-files
+sudo cp arch/x86/boot/bzImage /boot-files/ //copy the kernel from his origin directory in the new directory
+cd .. //Exit the directory
+
 
 Step 4.- Compiling BusyBox
-git clone --depth 1 https://git.busybox.net/busybox  
-cd busybox
-make menuconfig //Open a menu, navegate in to the menu 
-make -j  2  //When you try to compile Busybox the terminal print an error so you use nano (text editor) to change the configuration 
+git clone --depth 1 https://git.busybox.net/busybox  //Like the kernel of Linux, download the last version of the source code of BusyBox
+cd busybox 
+make menuconfig //Open a menu, navegate in to the menu, settings --> Build Options --> mark Build static binary (no shared libs), this This avoids external library dependencies.
+make -j  2   
+//When you try to compile Busybox the terminal print a few errors so use nano (text editor) to change the configuration of .config, explore the file until you see CONFIG_TC=y and change the =y  to =n and compile again.
 
+sudo mkdir /boot-files/initramfs //Create a directory into the directory /boot-files called /initramfs
+sudo make CONFIG_PREFIX=/boot-files/initramfs install //Says to busybox to install it into specific direction, this appper in the directory /boot-files/initramfs folders like /bin, /sbin and /usr.
+
+Step 5.- Create initramfs
 
