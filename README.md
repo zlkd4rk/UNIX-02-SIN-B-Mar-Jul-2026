@@ -63,5 +63,15 @@ sudo find . | cpio -o -H newc > ../init.cpio // list all List all current files 
 cd ..  // Exit the directory 
 
 Step 6.- Create the boot image
+sudo su //Change to root for the next steps/commands 
+dd if=/dev/zero of=boot bs=1M count=50 // dd is a tool to copy data of low level. Create an empty 50 MB file that will serve as a virtual disk.
+mkfs -t fat boot //Make File System. Create a FAT file system in that file (required by Syslinux). 
+syslinux boot // Install the necessary code in the boot sector of the boot file so that a computer knows that the disk "can be turned on"
+/*Mount the image, copy the kernel and the initramfs*/
+mkdir m //make a directory called m
+mount boot m // It tricks the operating system into believing that the boot file is a USB drive inserted in the folder called m
+cp bzImage init.cpio m // Copy the brain of the Operative System into a virtual disc.
+umount m 
+
 
 
