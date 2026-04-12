@@ -79,3 +79,6 @@ qemu-system-x86_64 -nographic -append "console=ttyS0" -kernel bzImage -initrd in
 //Emulate the program into a complete computer with 64 bits architecture. -nongraphic so QEMU dont pop up an another window and show all in the terminal. 
 
 //If you do all the steps correctly you can use a terminal and try some commands like ls, pwd, vi and bc, and runs the commands perfectly. 
+
+
+EXERCISES 
