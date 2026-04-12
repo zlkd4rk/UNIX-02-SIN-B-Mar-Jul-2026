@@ -55,4 +55,13 @@ sudo mkdir /boot-files/initramfs //Create a directory into the directory /boot-f
 sudo make CONFIG_PREFIX=/boot-files/initramfs install //Says to busybox to install it into specific direction, this appper in the directory /boot-files/initramfs folders like /bin, /sbin and /usr.
 
 Step 5.- Create initramfs
+cd /boot-files/initramfs // Go to the directory where you install BusyBox.
+sudo vi init //Use the editor "vi" to create a important file.  Use the comands #!/bin/sh (The kernel must execute use the shell interpreter) and in the second line /bin/sh (open a terminal to write commands).
+sudo rm linuxrc  //Busybox create a file called linuxrc so use rm(remove) to avoid a conflict with init file. 
+sudo chmod +x init  //chmod +x make a text file get permission to execute.
+sudo find . | cpio -o -H newc > ../init.cpio // list all List all current files and directorys. | (pipeline), cpio -o -H newc: take the list and transform it into a format for the linux kernel can understand. > ../init.cpio save all the compressed package in the superior direcory. 
+cd ..  // Exit the directory 
+
+Step 6.- Create the boot image
+
 
