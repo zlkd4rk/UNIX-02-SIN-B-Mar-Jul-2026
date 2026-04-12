@@ -73,5 +73,9 @@ mount boot m // It tricks the operating system into believing that the boot file
 cp bzImage init.cpio m // Copy the brain of the Operative System into a virtual disc.
 umount m 
 
+Step 7: Test with QEMU
 
+qemu-system-x86_64 -nographic -append "console=ttyS0" -kernel bzImage -initrd init.cpio -drive file=boot,format=raw
+//Emulate the program into a complete computer with 64 bits architecture. -nongraphic so QEMU dont pop up an another window and show all in the terminal. 
 
+//If you do all the steps correctly you can use a terminal and try some commands like ls, pwd, vi and bc, and runs the commands perfectly. 
