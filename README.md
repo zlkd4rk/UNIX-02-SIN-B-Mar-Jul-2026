@@ -98,4 +98,14 @@ In Codesapce (a traditional sustem), each command is a separate, large binary.In
 4.- Examine blocks: In the Codespace, create a file with `echo "hello" > test.txt` and then run `stat test.txt`. Identify the actual size versus the allocated blocks. Is there internal fragmentation?
 The file size is 6 bytes: 5 for the word 'hello' and one additional byte for the newline character (\n) included by the echo command. The system has allocated 8 blocks, and since each block is 512 bytes, the total space occupied is 4,096 bytes(8x512) is a clear case of internal fragmentation. Even though the file only requires 6 bytes, the system must assign an entire IO block (4,096 bytes) to it. Consequently, 4,090 bytes are wasted, as this remaining space within the block cannot be used by any other file.
 
-5.- 
+5.- Analyze partitions: Run `sudo parted -l && echo -e "\n---\n" && lsblk -f` on the codespace. This identifies which disks use GPT vs. MBR, and which filesystems are in use.
+Pattitions
+/dev/sda (size: 32.2GB) gpt //support more than 4 partitions
+/dev/sdb (size: 48.3GB) msdos(MBR) // legacy 
+/dev/sdc (Size: 550GB) gpt //Modern
+
+/*Filesystems*/
+ext4: The primary and most widely used file system in this environment located at: 
+sda1 //Mounted in the root and system directory
+sdb1 //Mounted in /tmp
+sdc1 //Grand size partition, 500GB)
