@@ -82,3 +82,9 @@ qemu-system-x86_64 -nographic -append "console=ttyS0" -kernel bzImage -initrd in
 
 
 EXERCISES 
+1.- Verify the firmware type: Run `[ -d /sys/firmware/efi ] && echo "UEFI" || echo "BIOS"` both in the Codespace and within QEMU. What result do you get and why? 
+
+In both cases print BIOS beccause both environments are configured to emulate or present a legacy boot interface instead of a modern UEFI firmware interface. , in GitHub Codesapces are execute on Docker Containers, the containers dont have direct access of the firmware of the hardware; In QEMU, default configuration use a firmeware called SeaBIOS.
+It is an open-source implementation of a traditional (Legacy) BIOS. SeaBIOS documentation. (n.d.). https://seabios.org/ 
+
+2.-Inspect the structure: Within QEMU, run `ls /` and compare it to the directory structure we saw in class. Which directories are missing and why? 
