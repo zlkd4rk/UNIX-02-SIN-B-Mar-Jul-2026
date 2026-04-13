@@ -88,3 +88,11 @@ In both cases print BIOS beccause both environments are configured to emulate or
 It is an open-source implementation of a traditional (Legacy) BIOS. SeaBIOS documentation. (n.d.). https://seabios.org/ 
 
 2.-Inspect the structure: Within QEMU, run `ls /` and compare it to the directory structure we saw in class. Which directories are missing and why? 
+
+Running `ls /` in a mini-distro has fewer elements than when used in the CodeSpace terminal. The amount of missing element is notorious.
+The reason of missing directorys is because the mini-distro is not running in a Hard Disc, is running a initramfs (initial file system in RAM). This only show the binarys of BusyBox (bin and sbin) and the script init. Other reason is the kernel dont create the directorys like etc or var automatically, Since you are building the system "by hand", if you don't create the folder with (example: mkdir ), it won't exist.
+
+3.-Exploring BusyBox: Within QEMU, run `ls -la /bin/` and observe that all the commands are symbolic links to the same binary. What advantage does this have for an embedded system?
+In Codesapce (a traditional sustem), each command is a separate, large binary.In the mini-distro, they are all symbolic links  to the single executable called BusyBox. This combine everything into a single binary and share common code across all functions. Reduces the toal filesystem size. Also when you execute a command the operating system already has the BusyBox code loaded into the cache.
+
+
