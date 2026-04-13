@@ -95,4 +95,7 @@ The reason of missing directorys is because the mini-distro is not running in a 
 3.-Exploring BusyBox: Within QEMU, run `ls -la /bin/` and observe that all the commands are symbolic links to the same binary. What advantage does this have for an embedded system?
 In Codesapce (a traditional sustem), each command is a separate, large binary.In the mini-distro, they are all symbolic links  to the single executable called BusyBox. This combine everything into a single binary and share common code across all functions. Reduces the toal filesystem size. Also when you execute a command the operating system already has the BusyBox code loaded into the cache.
 
+4.- Examine blocks: In the Codespace, create a file with `echo "hello" > test.txt` and then run `stat test.txt`. Identify the actual size versus the allocated blocks. Is there internal fragmentation?
+The file size is 6 bytes: 5 for the word 'hello' and one additional byte for the newline character (\n) included by the echo command. The system has allocated 8 blocks, and since each block is 512 bytes, the total space occupied is 4,096 bytes(8x512) is a clear case of internal fragmentation. Even though the file only requires 6 bytes, the system must assign an entire IO block (4,096 bytes) to it. Consequently, 4,090 bytes are wasted, as this remaining space within the block cannot be used by any other file.
 
+5.- 
