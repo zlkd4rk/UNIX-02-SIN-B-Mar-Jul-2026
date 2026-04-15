@@ -40,3 +40,7 @@ sudo chmod +x init #
 sudo #Substitute user do, allows you to run commands with elevated privileges.
 sudo echo "hola" > /etc/archivo_protegido #Only the echo command is run with elevated privileges, but the second part of the command line (redirection) dont execute with the sudo (elevated privileges).
 
+tee #Its a command that reads from standard input and writes to standard output and files. 
+echo "hola" | sudo tee /etc/archivo_protegido > /dev/null #Create the file but dont print the output in the terminal, because the output of the tee command is redirected to /dev/null.
+echo "hola" | sudo tee /etc/archivo_protegido  #Print in the terminal "hola" and write "hola" to the file /etc/archivo_protegido with elevated privileges.
+
