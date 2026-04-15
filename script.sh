@@ -30,7 +30,13 @@ and creates and checks out an initial branch that is forked from the cloned repo
 - rwx r-x r-- # Permission for user, group, and others (read, write, execute)
 
 chmod #Change mode, who, operator, permission, file
-chmod +x script.sh #
+chmod +x script.sh #Add execute permission for all users (user, group, and others) on the file script.sh
 chmod u+x script.sh #Add execute permission for the user (owner) of the file script.sh
-chmod o-r script-sh #Remove read permission for others (users who are not the owner or in the group) on the file script.sh
+chmod o-r script.sh #Remove read permission for others (users who are not the owner or in the group) on the file script.sh
 chmod u+rw,go-rwx script.sh #Add read and write permissions for the user (owner) of the file script.sh, and remove all permissions for group and others on the file script.sh
+
+sudo chmod +x init #
+
+sudo #Substitute user do, allows you to run commands with elevated privileges.
+sudo echo "hola" > /etc/archivo_protegido #Only the echo command is run with elevated privileges, but the second part of the command line (redirection) dont execute with the sudo (elevated privileges).
+
