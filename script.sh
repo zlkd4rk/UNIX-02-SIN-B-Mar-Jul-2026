@@ -53,3 +53,6 @@ cat /etc/archivo_protegido
 #When something implicate redirections, pipes and complex commands, use simple coutes to ensure that the entire command is executed with elevated privileges.
 
 sudo su - #Log in as root user, its more aceptable to use sudo su or sudo -i, provides a login shell with the environment of the root user. 
+
+echo "$HOME" #Print the directory path of current user home directory.
+echo '$HOME' #With simple quotes, the variable $HOME is not expanded and treated as a string, and the terminal print $HOME.
