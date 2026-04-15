@@ -35,7 +35,7 @@ chmod u+x script.sh #Add execute permission for the user (owner) of the file scr
 chmod o-r script.sh #Remove read permission for others (users who are not the owner or in the group) on the file script.sh
 chmod u+rw,go-rwx script.sh #Add read and write permissions for the user (owner) of the file script.sh, and remove all permissions for group and others on the file script.sh
 
-sudo chmod +x init #
+sudo chmod +x init 
 
 sudo #Substitute user do, allows you to run commands with elevated privileges.
 sudo echo "hola" > /etc/archivo_protegido #Only the echo command is run with elevated privileges, but the second part of the command line (redirection) dont execute with the sudo (elevated privileges).
@@ -44,3 +44,12 @@ tee #Its a command that reads from standard input and writes to standard output 
 echo "hola" | sudo tee /etc/archivo_protegido > /dev/null #Create the file but dont print the output in the terminal, because the output of the tee command is redirected to /dev/null.
 echo "hola" | sudo tee /etc/archivo_protegido  #Print in the terminal "hola" and write "hola" to the file /etc/archivo_protegido with elevated privileges.
 
+sudo sh -c 'echo "chao" >> /etc/archivo_protegido'
+#sudo: executa something like root
+#sh: open a shell  
+#-c says to the shell, all in the simple quotes intepreted this shell root.
+cat /etc/archivo_protegido
+
+#When something implicate redirections, pipes and complex commands, use simple coutes to ensure that the entire command is executed with elevated privileges.
+
+sudo su - #Log in as root user, its more aceptable to use sudo su or sudo -i, provides a login shell with the environment of the root user. 
