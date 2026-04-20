@@ -133,10 +133,19 @@ git commit -m "Fix problema 4: permisos simbolicos corregidos"
 
 `galaxia.sh` debe ejecutarse siempre con los privilegios del **dueño del archivo**,
 independientemente de quién lo invoque. Hay **1 fallo** de permisos especiales.
+sudo chmod u+s nebula/galaxia.sh
 
 Activa el bit **SUID** en `galaxia.sh`.
 Verifica con `ls -l` que la posición de ejecución del dueño muestre `s`.
-
+ls -l nebula/galaxia.sh
+-rwsrw-rw- 1 codespace root 267 Apr 20 12:18 nebula/galaxia.sh
+./nebula/galaxia.sh
+=== Módulo Galaxia v2.1 ===
+Iniciando secuencia de arranque...
+Timestamp: 2026-04-20 12:54:09
+Host: codespaces-a1656a
+Usuario efectivo: codespace
+Sistema listo.
 > ⚠️ Nota académica: el SUID en scripts de shell tiene restricciones en Linux moderno,
 > pero el ejercicio evalúa que sepas aplicar el bit correctamente.
 
