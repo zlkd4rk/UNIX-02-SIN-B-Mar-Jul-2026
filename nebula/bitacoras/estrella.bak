@@ -1,0 +1,5 @@
+HOST=nebula-01
+MODULO=estrella
+VERSION=3.2.1
+TIMEOUT=30
+DEBUG=false
