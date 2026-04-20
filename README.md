@@ -165,9 +165,11 @@ git commit -m "Fix problema 5: SUID activado en galaxia.sh"
 El directorio `/tmp/nebula_zone` es un espacio compartido entre usuarios.
 Tiene **1 fallo**: le falta el **sticky bit**, lo que permite que cualquier usuario
 elimine archivos ajenos.
-
+chmod +t /tmp/nebula_zone
 Activa el sticky bit. Verifica con `ls -ld /tmp/nebula_zone` que aparezca `t`
 al final de los permisos (ejemplo: `drwxrwxrwt`).
+
+drwxr-xrwT+ 2 codespace codespace 4096 Apr 20 12:55 /tmp/nebula_zone
 
 > Nota: `/tmp/nebula_zone` no vive en el repositorio git, pero el verificador lo comprueba.
 
