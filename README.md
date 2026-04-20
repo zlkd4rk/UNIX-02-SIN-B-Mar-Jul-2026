@@ -90,6 +90,7 @@ Sus permisos actuales son demasiado permisivos. Los permisos correctos son:
 - **Otros**: ningún permiso
 
 Aplica el permiso correcto usando **notación numérica (octal)**.
+-rw-r----- 1 codespace root 183 Apr 20 12:18 nebula/bitacoras/cosmos.txt
 
 ```bash
 git add .
