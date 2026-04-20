@@ -108,8 +108,13 @@ git commit -m "Fix problema 3: permisos numericos 640 en cosmos.txt"
 Hay **2 fallos** que deben corregirse usando **notación simbólica** (`u+x`, `o-w`, etc.):
 
 - `galaxia.sh` no tiene permiso de ejecución para su **dueño**. Añádelo.
+sudo chmod u+x nebula/galaxia.sh
+-rw-rw-rw- 1 codespace root 267 Apr 20 12:18 nebula/galaxia.sh
+-rwxrw-rw- 1 codespace root 267 Apr 20 12:18 nebula/galaxia.sh
 - `estrella.conf` tiene permiso de **escritura para `others`**. Quítalo.
-
+sudo chmod o-w nebula/estrella.conf
+-rw-rw-rw- 1 codespace root  68 Apr 20 12:18 nebula/estrella.conf
+-rwxrw-r-- 1 codespace root 68 Apr 20 12:18 nebula/estrella.conf
 > ⚠️ Usa solo notación simbólica. No uses números para este problema.
 
 ```bash
