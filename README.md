@@ -60,11 +60,13 @@ git commit -m "Fix problema 1: estructura de directorios corregida"
 ### Problema 2 — Archivos mal ubicados y renombrados · **(1 pt máx · 2 fallos)**
 
 Dentro de `nebula/` hay **exactamente 2 errores** de nombre o ubicación de archivos:
-
+Aqui podemos usar man, para ver que exactamente es mv
 - Un archivo de texto con datos de telemetría está en la **ubicación incorrecta**;
   debería estar dentro de `bitacoras/`. Muévelo (no lo copies).
+  Usamos mv (move) nebula/cosmos.txt nebula/bitacoras/  para mover el archivo en vez de copiar y nombrarlo.
 - Un archivo de configuración tiene **extensión incorrecta** (`.bak`);
   su nombre correcto es `estrella.conf`.
+  Volvemos a usar mv (move/rename) para cambiar el nombre de estrella.bak a estrella.conf
 
 ```bash
 git add .
