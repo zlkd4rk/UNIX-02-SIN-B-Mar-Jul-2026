@@ -141,7 +141,7 @@ git commit -m "Fix problema 5: SUID activado en galaxia.sh"
 |-----------|----------|-----------------|---------------|
 | 5. `galaxia.sh` tiene bit SUID activo | +1.00 | -0.50 | 0 |
 
----
+----
 
 ### Problema 6 — Sticky bit · **(1 pt máx · 1 fallo)**
 
