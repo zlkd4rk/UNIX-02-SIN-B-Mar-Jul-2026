@@ -161,7 +161,7 @@ git commit -m "Fix problema 6: sticky bit en /tmp/nebula_zone"
 
 | Sub-check | Correcto | Intento fallido | Sin respuesta |
 |-----------|----------|-----------------|---------------|
-| 6. `/tmp/nebula_zone` tiene sticky bit | +1.00 | -0.50 | 0 |
+| 6. `/tmp/nebula_zone` tiene sticky bit | +1.00 | -0.50 | 0 |-
 
 ---
 
