@@ -55,7 +55,7 @@ git commit -m "Fix problema 1: estructura de directorios corregida"
 | 1a. `bitacoras` existe y `registros` no | +0.75 | -0.25 | 0 |
 | 1b. `borradores` existe | +0.75 | — | 0 |
 
----
+------
 
 ### Problema 2 — Archivos mal ubicados y renombrados · **(1 pt máx · 2 fallos)**
 
