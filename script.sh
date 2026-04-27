@@ -89,3 +89,24 @@ ls -l mi_archivo #List only this file in long format
 sudo useradd -m -s /usr/bin/zsh luna #Add new user with a home directory and define the shell lune is about to use
 sudo chown luna mi_archivo #Change the user luna instead of Codespaces
 ls -l mi_archivo
+
+groups #See the groups 
+newgrp grupo_test #Crete a new group called grupo_test 
+groupadd grupo_test #Add the group
+groups #See all the groups again
+touch comun #Create a file called comun
+ls -l comun #List the file
+
+
+sudo chown luna:grupo_test mi_archivo #Change the owner to luna and in the group create a file mi_archivo
+ls -l mi_archivo #list the file
+-rw-r--r-- 1 luna grupo_test 5 Apr 27 13:12 mi_archivo
+#Use this if the command needs a passwrod
+sudo usermod -aG grupo_test $USER
+#Estructure
+chown usuario:grupo fichero
+
+mkdir -p proyecto/sub #Create a directory in proyecto and other folder in sub
+touch proyecto/readme proyecto/sub/datos #Use touch to create a readme in proyecto and other in /sub/datos
+sudo chown -R luna:grupo_test proyecto #Change the user in recursive to luna for the new grpuo grupo_test in proyecto
+ls -lR proyecto #Use ls to see the list with a long format with Recursive reading
