@@ -78,3 +78,14 @@ mkdir privado #Same as the last one 777-077 = 700
 ls -l #List all the files 
 -rw------- 1 codespace codespace     0 Apr 27 12:59 secreto.txt
 drwx------ 2 codespace codespace  4096 Apr 27 12:59 privado
+
+chown #Change the owner. Usually only the root can change it
+chgrp #Change group 
+
+whoami
+echo "Hola" > mi_archivo #Create a file with the text/message "Hola"
+ls -l mi_archivo #List only this file in long format
+
+sudo useradd -m -s /usr/bin/zsh luna
+sudo chown luna mi_archivo
+ls -l mi_archivo
