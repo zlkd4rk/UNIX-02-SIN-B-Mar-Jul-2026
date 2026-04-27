@@ -65,7 +65,9 @@ touch archivo1 #Try to touch the file if the file dosent exist crete this file
 mkdir directorio1 #Create a directory
 ls-l #List of the files and directorys in long format
 #Search the problem un the browser and you can find the solution for this problem
+https://github.com/orgs/community/discussions/26026 
 sudo apt-get update
+sudo apt-get upgrade #Missing step
 sudo apt-get install acl
 sudo chown -R $(whoami) .
 sudo setfacl -bnR .
