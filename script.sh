@@ -57,3 +57,22 @@ sudo su - #Log in as root user, its more aceptable to use sudo su or sudo -i, pr
 echo "$HOME" #Print the directory path of current user home directory.
 echo '$HOME' #With simple quotes, the variable $HOME is not expanded and treated as a string, and the terminal print $HOME.
 
+
+
+boot-exploration (27-04-2026)
+umask --> 0022 #When yo create a file/directory you can subtract permission 725 - 705 --> 020
+touch archivo1 #Try to touch the file if the file dosent exist crete this file
+mkdir directorio1 #Create a directory
+ls-l #List of the files and directorys in long format
+#Search the problem un the browser and you can find the solution for this problem
+sudo apt-get update
+sudo apt-get install acl
+sudo chown -R $(whoami) .
+sudo setfacl -bnR .
+
+umask 077 #Change the permission with umask 
+touch secreto.txt #Create a new file but when you crete the file this are created with the 077 permission 677-077 = 700
+mkdir privado #Same as the last one 777-077 = 700
+ls -l #List all the files 
+-rw------- 1 codespace codespace     0 Apr 27 12:59 secreto.txt
+drwx------ 2 codespace codespace  4096 Apr 27 12:59 privado
