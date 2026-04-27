@@ -86,6 +86,6 @@ whoami
 echo "Hola" > mi_archivo #Create a file with the text/message "Hola"
 ls -l mi_archivo #List only this file in long format
 
-sudo useradd -m -s /usr/bin/zsh luna
-sudo chown luna mi_archivo
+sudo useradd -m -s /usr/bin/zsh luna #Add new user with a home directory and define the shell lune is about to use
+sudo chown luna mi_archivo #Change the user luna instead of Codespaces
 ls -l mi_archivo
