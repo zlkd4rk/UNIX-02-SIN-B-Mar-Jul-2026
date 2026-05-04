@@ -20,3 +20,16 @@ python salt.py
 cat /etc/group | head -10 #See the content of the groups in the etc directory only the first ten groups.
 groups #See what group the user below the user
 groups $USER #See the /etc/group, with the environment variable to see which group the user belows. 
+
+id -u # User ID
+id -g # Grupo ID principal
+id -G # 
+
+cat  /etc/group | grep codespace #In the actual configuration the codespaes gruops dont exist so the commands print a error
+#If you want to see the command run write a valid name before grep.
+
+cat /etc/gshadow #System groups required for Linux to work
+
+mkdir ~/proyecto_unix/ #Create a directory in the location ~/proyecto_unix/
+ls -la ~/proyecto_unix/ #See the user (root) and in the group (root).
+
