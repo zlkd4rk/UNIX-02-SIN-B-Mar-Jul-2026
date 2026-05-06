@@ -108,3 +108,8 @@ usermod -aG grupo_temporal root
 id root
 usermod -G desarrolladores root 
 id root
+
+#Restore
+usermod -aG diseno,marketing,grupo_temporal root
+id root
+uid=0(root) gid=0(root) grupos=0(root),1000(desarrolladores),1001(diseno),2100(marketing),2101(grupo_temporal)
