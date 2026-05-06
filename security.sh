@@ -33,3 +33,33 @@ cat /etc/gshadow #System groups required for Linux to work
 mkdir ~/proyecto_unix/ #Create a directory in the location ~/proyecto_unix/
 ls -la ~/proyecto_unix/ #See the user (root) and in the group (root).
 
+#groupadd [options] group_name
+#Create a simple group
+sudo groupadd desarrolladores
+sudo groupadd -g 2000 operaciones #GID especifico
+#When the GId is less than 1000 is system gruop (GID>1000)
+sudo groupadd --system servicios_web
+
+#Verify the creations of the groups
+grep "desarrolladores\|operaciones\|servicios_web" /etc/group
+desarrolladores:x:1000:
+operaciones:x:2000:
+servicios_web:x:995:
+
+grep -E "desarrolladores|operaciones|servicios_web" /etc/group
+desarrolladores:x:1000:
+operaciones:x:2000:
+servicios_web:x:995:
+
+#See principal options
+groupadd --help
+
+
+#See the range of the GIDs in the system
+grep "GID_MIN\|GID_MAX\|SYS_GID" /etc/login.defs
+#The system group have less GID than user minimun.
+#SYS_GID_MIN              100
+#SYS_GID_MAX              999
+SUB_GID_MIN               1000
+SUB_GID_MAX               60000
+
