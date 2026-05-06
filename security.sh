@@ -58,8 +58,9 @@ groupadd --help
 #See the range of the GIDs in the system
 grep "GID_MIN\|GID_MAX\|SYS_GID" /etc/login.defs
 #The system group have less GID than user minimun.
-#SYS_GID_MIN              100
+GID_MIN                  1000
+GID_MAX                 60000
+#SYS_GID_MIN              101
 #SYS_GID_MAX              999
-SUB_GID_MIN               1000
-SUB_GID_MAX               60000
-
+SUB_GID_MIN                100000
+SUB_GID_MAX             600100000
