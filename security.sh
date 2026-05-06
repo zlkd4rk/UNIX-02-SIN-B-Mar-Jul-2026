@@ -113,3 +113,22 @@ id root
 usermod -aG diseno,marketing,grupo_temporal root
 id root
 uid=0(root) gid=0(root) grupos=0(root),1000(desarrolladores),1001(diseno),2100(marketing),2101(grupo_temporal)
+
+mkdir -p ~/lab_chgrp/{proyectos,reportes,scripts}
+touch ~/lab_chgrp/proyectos/app.py
+touch ~/lab_chgrp/proyectos/config.json
+touch ~/lab_chgrp/reportes/informe.txt
+touch ~/lab_chgrp/scripts/deploy.sh
+
+ls -la ~/lab_chgrp/proyectos/
+total 8
+drwxr-xr-x 2 root root 4096 may  6 13:29 .
+drwxr-xr-x 5 root root 4096 may  6 13:27 ..
+-rw-r--r-- 1 root root    0 may  6 13:28 app.py
+-rw-r--r-- 1 root root    0 may  6 13:29 config.json
+
+ls -la ~/lab_chgrp/reportes/ 
+total 8
+drwxr-xr-x 2 root root 4096 may  6 13:30 .
+drwxr-xr-x 5 root root 4096 may  6 13:27 ..
+-rw-r--r-- 1 root root    0 may  6 13:30 informe.txt
