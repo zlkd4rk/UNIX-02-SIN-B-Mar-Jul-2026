@@ -140,3 +140,20 @@ drwxr-xr-x 2 root root            4096 may  6 13:29 .
 drwxr-xr-x 5 root root            4096 may  6 13:27 ..
 -rw-r--r-- 1 root desarrolladores    0 may  6 13:28 app.py
 -rw-r--r-- 1 root root               0 may  6 13:29 config.json
+
+chgrp diseno \
+> ~/lab_chgrp/proyectos/config.json \
+> ~/lab_chgrp/reportes/informe.txt
+
+ls -la ~/lab_chgrp/proyectos/           
+total 8
+drwxr-xr-x 2 root root            4096 may  6 13:29 .
+drwxr-xr-x 5 root root            4096 may  6 13:27 ..
+-rw-r--r-- 1 root desarrolladores    0 may  6 13:28 app.py
+-rw-r--r-- 1 root diseno             0 may  6 13:29 config.json
+
+ls -la ~/lab_chgrp/reportes/ 
+total 8
+drwxr-xr-x 2 root root   4096 may  6 13:30 .
+drwxr-xr-x 5 root root   4096 may  6 13:27 ..
+-rw-r--r-- 1 root diseno    0 may  6 13:30 informe.txt
