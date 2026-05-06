@@ -74,3 +74,14 @@ grep "diseno\|marketing\|cache_web" /etc/group
 diseno:x:1001:
 marketing:x:2100:
 cache_web:x:102:
+
+groups
+id
+#Add the user in a group with usermod (bajo nivel)
+usermod -aG desarrolladores root
+usermod -aG diseno root
+id root
+grep "desarrolladores" /etc/group
+desarrolladores:x:1000:root
+grep "diseno" /etc/group
+diseno:x:1001:root
