@@ -81,7 +81,23 @@ id
 usermod -aG desarrolladores root
 usermod -aG diseno root
 id root
+
+
+# -a (append)
+#This add the gropups instead of rewrite it
+
+#Verify the changes in etc/group
 grep "desarrolladores" /etc/group
 desarrolladores:x:1000:root
 grep "diseno" /etc/group
 diseno:x:1001:root
+grep "desarrolladores\|diseno" /etc/group
+
+adduser root marketing
+#See the curreng status
+id root
+grep root /etc/group
+root:x:0:
+desarrolladores:x:1000:root
+diseno:x:1001:root
+marketing:x:2100:root
