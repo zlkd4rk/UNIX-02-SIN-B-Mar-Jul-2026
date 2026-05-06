@@ -101,3 +101,10 @@ root:x:0:
 desarrolladores:x:1000:root
 diseno:x:1001:root
 marketing:x:2100:root
+
+#Create a temporal group
+groupadd grupo_temporal 
+usermod -aG grupo_temporal root
+id root
+usermod -G desarrolladores root 
+id root
