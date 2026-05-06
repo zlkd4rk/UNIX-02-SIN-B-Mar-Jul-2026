@@ -157,3 +157,5 @@ total 8
 drwxr-xr-x 2 root root   4096 may  6 13:30 .
 drwxr-xr-x 5 root root   4096 may  6 13:27 ..
 -rw-r--r-- 1 root diseno    0 may  6 13:30 informe.txt
+
+chgrp -R desarrolladores ~/lab_chgrp/scipts/
