@@ -78,3 +78,26 @@ newgrp desarrolladores
 echo "PID dentro de newgrp: $$" 
 #@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ echo "PID dentro de newgrp: $$" 
 #PID dentro de newgrp: 27280
+
+sudo groupadd grupo_restringido
+sudo gpasswd grupo_restringido
+#Changing the password for group grupo_restringido
+#New Password: 
+#Re-enter new password:         /hola1234
+
+newgrp grupo_restringido
+#Password: Hola1234
+id -gn
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ id -gn
+#grupo_restringido
+exit
+
+
+
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ newgrp grupo_restringido
+#Password: 
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ id -gn
+#grupo_restringido
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ exit
+#exit
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ 
