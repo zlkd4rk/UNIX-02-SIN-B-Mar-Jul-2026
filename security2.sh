@@ -59,3 +59,22 @@ ls -la ~/
 #-rw-r--r-- 1 vscode desarrolladores     0 May 27 13:30 dentro_de_newgrp.txt
 #drwxr-xr-x 3 vscode desarrolladores  4096 May 27 13:30 proyecto_dev
 #-rw-r--r-- 1 vscode vscode              0 May 27 12:55 test_grupo_heredado.txt
+
+#Exit of the subshell
+exit
+#Verify if you return to the original group
+id -gn
+echo "Grupo restaurado: $(id -gn)"
+
+ls -la ~/antes_de_newgrp.txt ~/dentro_de_newgrp.txt
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ ls -la ~/antes_de_newgrp.txt ~/dentro_de_newgrp.txt
+#-rw-r--r-- 1 vscode vscode          0 May 27 13:04 /home/vscode/antes_de_newgrp.txt
+#-rw-r--r-- 1 vscode desarrolladores 0 May 27 13:30 /home/vscode/dentro_de_newgrp.txt
+
+echo "PID del shell actual : $$"
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ echo "PID del shell actual : $$"
+#PID del shell actual : 11645
+newgrp desarrolladores
+echo "PID dentro de newgrp: $$" 
+#@zlkd4rk ➜ /workspaces/UNIX-02-SIN-B-Mar-Jul-2026 (security2) $ echo "PID dentro de newgrp: $$" 
+#PID dentro de newgrp: 27280
