@@ -1,8 +1,9 @@
 #!/bin/bash 
 
+set -x
 #This option prints all commands and their arguments as they are executed to the terminal.
 
-bash --version
+# bash --version
 env 
 
 echo ${SHELL}
@@ -14,13 +15,14 @@ ps -ef
 df --human-readable #df -h
 
 chmod 777 blackhatbash1.sh
-./blackhatbash1.sh
-bash -r blackhatbash1.sh #This option creates a restricted bash shell, which restricts certain potentially dangerous commands.
+# ./blackhatbash1.sh
+# bash -r blackhatbash1.sh #This option creates a restricted bash shell, which restricts certain potentially dangerous commands.
 
 
-bash -n black
+# bash -n black
 
-bash -n blackhatbash1.sh #Start a debugger to see sintaxys errors into the script. #Star a infinite bucle.
-bash -x blackhatbash1.sh
+# bash -n blackhatbash1.sh //Start a debugger to see sintaxys errors into the script. #Star a infinite bucle.
+# bash -x blackhatbash1.sh
 
 
+set +x
