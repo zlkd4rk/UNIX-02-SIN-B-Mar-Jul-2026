@@ -1,6 +1,5 @@
 #! /bin/bash
-set -x
-let result="4**5"
+let result="4*5"
 echo ${result}
 #20
 
@@ -9,7 +8,3 @@ echo {result1}
 #25
 
 
-
-
-
-set +x
