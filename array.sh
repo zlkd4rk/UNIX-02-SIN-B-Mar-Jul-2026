@@ -7,3 +7,6 @@ echo "${IP_ADDRESSES[*]}"
 echo "${IP_ADDRESSES[0]}"
 unset IP_ADDRESSES[1]
 echo "${IP_ADDRESSES[*]}"
+
+IP_ADDRESSES[0]="192.168.1.10"
+echo "${IP_ADDRESSES[*]}"
