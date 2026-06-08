@@ -8,3 +8,7 @@ ping -c 3 "${TARGET}" #Only do 3 pings.
 
 echo "The arguments are: $@"
 echo "The total number of arguments is: $#"
+# Change "$@" to "$*" to observe behavior.
+for args in "$@"; do
+echo "${args}"
+done
