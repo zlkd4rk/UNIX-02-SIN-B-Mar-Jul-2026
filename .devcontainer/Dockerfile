@@ -1,29 +1,13 @@
-# ============================================================================
-#  Dockerfile — "receta" para construir la imagen del curso
-# ============================================================================
-#  Un Dockerfile es un archivo de texto con instrucciones paso a paso que
-#  Docker (o Codespaces) lee de arriba hacia abajo para fabricar una
-#  "imagen". Una imagen es como un molde congelado de un sistema Linux
-#  listo para usar; cada vez que abres el Codespace, se crea un
-#  "contenedor" a partir de ese molde.
-#
-#  Analogía: la imagen es el PLANO, el contenedor es la CASA construida
-#  con ese plano. Puedes construir muchas casas iguales a partir de un
-#  solo plano, y si destruyes una casa el plano sigue intacto.
-#
-#  Cada instrucción (FROM, ENV, RUN...) crea una "capa". Docker guarda
-#  esas capas en caché: si no cambias las primeras líneas, no las
-#  reconstruye y el siguiente build es casi instantáneo.
-# ============================================================================
-
-
-# ----------------------------------------------------------------------------
-# FROM: imagen base sobre la que vamos a construir
-# ----------------------------------------------------------------------------
-# En lugar de partir de cero, partimos de la imagen oficial de Kali Linux
-# en su versión "rolling" (actualización continua, siempre al día).
-# Todo lo que instalemos más abajo se apila ENCIMA de esta base.
+#BLOCK A
+#FROM defines the base image, the starting point of our container, instead of start from cero.
+#Use kalilinux/kali-rolling image because it is continuously updated and is always up to date.
+#All the tools that we install below are applied to this image
 FROM kalilinux/kali-rolling:latest
+#BLOCK B
+#When it comes to create a Image, Docker builds images in "layers". Each instruction creates a new layer that get cached.
+#So the reason to the order is important because if you modify the first lines the other layers enter in the rebuild, but
+#if you only modify the lastest layers in the Docker the other layers dont rebuild only the last ones because Dockerfile read up to down. 
+ 
 
 
 # ----------------------------------------------------------------------------
