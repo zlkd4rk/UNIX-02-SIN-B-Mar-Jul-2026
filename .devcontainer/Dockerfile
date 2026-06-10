@@ -152,13 +152,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  #in any subsequent RUN commands during the build process
 SHELL ["/bin/bash", "-c"]
 
-
-# ----------------------------------------------------------------------------
-# WORKDIR: directorio de trabajo al entrar al contenedor
-# ----------------------------------------------------------------------------
-# Codespaces siempre monta el código del repositorio en
-# /workspaces/<nombre-del-repo>. Establecer /workspaces aquí hace que las
-# terminales se abran cerca de nuestros archivos del curso.
+# BLOCK I
+# WORKDIR sets the default directory for any subsequent RUN, CMD, or ENTRYPOINT instructions.
+#Sets Workspaces here to the terminal run near to the class files.
 WORKDIR /workspaces
 
 # Configuración de Git para el contenedor:
