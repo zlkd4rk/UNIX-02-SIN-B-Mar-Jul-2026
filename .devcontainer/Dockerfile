@@ -136,10 +136,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && sed -i 's/# es_ES.UTF-8/es_ES.UTF-8/' /etc/locale.gen \
  && locale-gen \
  \
- # --- Limpieza final: reducir el tamaño de la imagen ---
- # apt deja archivos de caché que ya no necesitamos después de instalar.
- # Borrarlos aquí (en el mismo RUN) hace la capa final más pequeña.
- # Si los borráramos en otro RUN, seguirían ocupando en la capa anterior.
+ 
+ #BLOCK G
+#apt-get clean: Clears out the local repository of retrieved package files.
+#rm -rf /var/lib/apt/lists/* :deletes the cached package lists. 
+#Doing this in the big RUN layer as the installation prevents these useless 
+#temporary files from taking up megabytes of space in the final Docker image.
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
