@@ -136,7 +136,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && sed -i 's/# es_ES.UTF-8/es_ES.UTF-8/' /etc/locale.gen \
  && locale-gen \
  \
- 
+
  #BLOCK G
 #apt-get clean: Clears out the local repository of retrieved package files.
 #rm -rf /var/lib/apt/lists/* :deletes the cached package lists. 
@@ -145,13 +145,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-
-# ----------------------------------------------------------------------------
-# SHELL: qué intérprete usar en los siguientes RUN
-# ----------------------------------------------------------------------------
-# Por defecto Docker usa /bin/sh (un shell más limitado y antiguo). Lo
-# cambiamos a bash por si agregamos más instrucciones con sintaxis
-# moderna (arrays, [[ ]], etc.).
+ #BLOCK H
+ #In default Docker use sh, for RUN commands. 
+ #Also Sh is older than Bash, and Bash include more features like the use of [] or [[]].
+ #CHnage the configuration to bash so we can use advanced bash features
+ #in any subsequent RUN commands during the build process
 SHELL ["/bin/bash", "-c"]
 
 
