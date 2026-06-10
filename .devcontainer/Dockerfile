@@ -169,22 +169,27 @@ RUN git config --system --add safe.directory '*' \
  && git config --system pull.rebase false \
  && git lfs install --system
 
-# BLOCK K
-# 'chsh' changes the login shell. Here, we are changing the root user's 
-# default shell from bash to zsh.
+#BLOCK K
+#"chsh" changes the login shell. Here, we are changing the root user's 
+#default shell from bash to zsh.
 RUN chsh -s /usr/bin/zsh/ root
 
 
-# BLOCK L
-# A "heredoc"  allows us to pass a multi-line block of text into 
-# a command without writing multiple 'echo' statements.
-# The PROMPT variable configures how the terminal prompt looks with colors, and characters like ok when
+#BLOCK L
+#A "heredoc"  allows us to pass a multi-line block of text into 
+#a command without writing multiple 'echo' statements.
+#The PROMPT variable configures how the terminal prompt looks with colors, and characters like ok when
 #a command runs correctly and notok when the command fails.
 RUN cat>> /root/.zshrc <<'EOF'
 
 PROMPT='%F{cyan}[Andres_Pesantez]%f %F{yellow}%1~%f %(?.%F{green}ok%f.%F{red}notok %?%f) %# '
 EOF
 
+#BLOCK M
+#RUN executes commands during the image build process.
+#CMD specifies the default command that executes at startup when a container 
+#is launched from the built image. 
+#In this case, it launches the Zsh interactive shell.
 CMD ["/usr/bin/zsh"]
 
 
