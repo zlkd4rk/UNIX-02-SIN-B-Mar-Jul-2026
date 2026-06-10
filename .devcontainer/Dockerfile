@@ -131,9 +131,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     \
 
 #BLOCK F
- # --- Después de instalar, activamos el idioma español ---
- # sed busca "# es_ES.UTF-8" en /etc/locale.gen y le quita el "#" para
- # activar esa línea. Luego locale-gen compila los archivos de idioma.
+#We use 'sed' to uncomment the Spanish locale line inside /etc/locale.gen.
+#Then 'locale-gen' compiles that locale so the system can use it.
  && sed -i 's/# es_ES.UTF-8/es_ES.UTF-8/' /etc/locale.gen \
  && locale-gen \
  \
