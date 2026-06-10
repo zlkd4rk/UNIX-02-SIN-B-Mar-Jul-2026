@@ -174,6 +174,12 @@ RUN git config --system --add safe.directory '*' \
 # default shell from bash to zsh.
 RUN chsh -s /usr/bin/zsh/ root
 
+
+# BLOCK L
+# A "heredoc"  allows us to pass a multi-line block of text into 
+# a command without writing multiple 'echo' statements.
+# The PROMPT variable configures how the terminal prompt looks with colors, and characters like ok when
+#a command runs correctly and notok when the command fails.
 RUN cat>> /root/.zshrc <<'EOF'
 
 PROMPT='%F{cyan}[Andres_Pesantez]%f %F{yellow}%1~%f %(?.%F{green}ok%f.%F{red}notok %?%f) %# '
