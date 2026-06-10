@@ -157,13 +157,13 @@ SHELL ["/bin/bash", "-c"]
 #Sets Workspaces here to the terminal run near to the class files.
 WORKDIR /workspaces
 
-# Configuración de Git para el contenedor:
-# - safe.directory *: confía en cualquier repo montado (necesario porque
-#   /workspaces/... tiene un UID distinto al de root dentro del container).
-# - init.defaultBranch main: evita warnings de "master vs main" en git init.
-# - pull.rebase false: merge por defecto al hacer pull (más intuitivo)
-# - git lfs install --system: registra los hooks de LFS globalmente para
-#   que, si un repo los necesita, funcionen sin sorpresas.
+
+#BLOCK J
+#This configures Git globally for the container system.
+#safe.directory '*': Prevents ownership errors by trusting all directories.
+#init.defaultBranch main: Establishes main as the starting branch for new repositories.
+#pull.rebase false: Forces standard merge commits instead of rebasing during a git pull.
+#git lfs install --system: Initializes Git Large File Storage globally to handle bulky assets seamlessly.
 RUN git config --system --add safe.directory '*' \
  && git config --system init.defaultBranch main \
  && git config --system pull.rebase false \
