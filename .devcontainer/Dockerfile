@@ -9,29 +9,14 @@ FROM kalilinux/kali-rolling:latest
 #if you only modify the lastest layers in the Docker the other layers dont rebuild only the last ones because Dockerfile read up to down. 
  
 
-
-# ----------------------------------------------------------------------------
-# ENV: variables de entorno permanentes dentro del contenedor
-# ----------------------------------------------------------------------------
-# Las variables de entorno son "ajustes globales" que cualquier programa
-# del sistema puede leer. Se escriben en MAYÚSCULAS por convención.
-#
-#   DEBIAN_FRONTEND=noninteractive
-#     Le dice al instalador de paquetes (apt) "no me hagas preguntas
-#     interactivas, asume respuestas por defecto". Sin esto, algunos
-#     paquetes pausarían el build esperando que pulsemos una tecla y se
-#     quedaría colgado para siempre (porque no hay nadie mirando).
-#
-#   LANG / LC_ALL=es_ES.UTF-8
-#     Configuran idioma y codificación de caracteres. UTF-8 es lo que
-#     permite que acentos, ñ, €, emojis, etc. se muestren bien.
-#
-#   TERM=xterm-256color
-#     Le indica a los programas que la terminal admite 256 colores, para
-#     que vim, nvim, htop, etc. se vean con todos sus colores.
-#
-# La barra invertida "\" al final de cada línea significa "esto continúa
-# en la línea siguiente". Solo es para legibilidad.
+#BLOCK C
+#ENV come from Enviroment Variables
+#ENV sets environment variables that persist throughout the build and container run. Like globlal settings.
+# DEBIAN_FRONTEND=noninteractive: Says to the apt dont make interactive questions, an example when you try donwload some thing most of the time need a confirmation Y/N
+#so when you rebuild to make the enviroment nobody can accepts that things and and prevents it from freezing.
+#LANG & LC_ALL: sets the default lenguage and also provides the chance to use special characters. 
+#TERM: Ensures terminal can supports colors.
+# \: This inverted slash is useful to when you try to write commands instead of write a large one you can divided in differents lines like this:
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=es_ES.UTF-8 \
     LC_ALL=es_ES.UTF-8 \
