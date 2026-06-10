@@ -23,13 +23,14 @@ ENV DEBIAN_FRONTEND=noninteractive \
     TERM=xterm-256color
 
 
-# ----------------------------------------------------------------------------
-# Pre-respuesta a una pregunta interactiva de Wireshark
-# ----------------------------------------------------------------------------
-# Wireshark/tshark PREGUNTA durante su instalación si los usuarios
-# normales (no-root) deben poder capturar paquetes. Como en el contenedor
-# siempre somos root, respondemos "false" POR ADELANTADO usando
-# debconf-set-selections para que no detenga el build esperando input.
+
+
+
+#BLOCK D
+#Wireshark is a network protocol analyzer, called a packet analyzer, designed to provide visibility into the traffic that occurs on a network or between machines.
+#Most of the time during the installation Wireshark ask if non-root users can capture packages.
+#Remember the before configurations, the build is not interactive, so use debconf-set-selections to pre-answer "true".
+#In this case are we root all the time so debconf-set-selections respond "false" in advance.  
 RUN echo "wireshark-common wireshark-common/install-setuid boolean false" \
     | debconf-set-selections
 
