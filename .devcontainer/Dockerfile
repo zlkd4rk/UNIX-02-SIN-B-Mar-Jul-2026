@@ -35,47 +35,40 @@ RUN echo "wireshark-common wireshark-common/install-setuid boolean false" \
     | debconf-set-selections
 
 
-# ----------------------------------------------------------------------------
-# RUN: ejecutar comandos durante la construcción de la imagen
-# ----------------------------------------------------------------------------
-# Aquí instalamos TODO el software del curso en un solo RUN.
-#
-#   apt-get update          -> actualiza la lista de paquetes disponibles
-#   apt-get install         -> descarga e instala los paquetes listados
-#     -y                    -> responde "sí" automáticamente
-#     --no-install-recommends -> instala SOLO lo esencial (no los extras
-#                                sugeridos). Ahorra cientos de MB.
-#
-# ¿Por qué un solo RUN gigante y no 10 RUN pequeños?
-# Porque CADA RUN crea una capa nueva en la imagen. Menos capas = imagen
-# más pequeña, más rápida de construir y de descargar.
-#
-# El "&&" encadena comandos: ejecuta el siguiente SOLO SI el anterior
-# terminó bien. Si algo falla, el build se detiene con error (que es lo
-# que queremos: mejor un error claro que una imagen rota).
+
+#BLOCK E
+#IMPORTANT: The use of && to make a chain of commands so, if the last commands fail the next command not run. 
+#apt-get update: This update the list of packages.
+#apt-get install: this is for the installations of all the packages of the tools you want in the image.
+#-y: Respond (yes) to all the questions of each confirmation to instalation for the packages
+#--no-install-recommends: Only install the "essentials" and refuse the extras to save storage.
+
+#The reason to make a big RUN instead of multiple ones is beacuase for each run make a layer, so more layers make a more big image.
+#And also less layers when you modify lines make the rebuild less longer. 
+
 RUN apt-get update && apt-get install -y --no-install-recommends \
     \
-    # === Editores de texto y shells (intérpretes de comandos) ===
+    #Text editors, useful for scripting.
     neovim \
     vim \
     zsh \
     bash-completion \
     \
-    # === Herramientas de 4ta generación ===
-    # Estas son las protagonistas de las Unidades 2, 3 y 4:
+    #Fourth generations tools
+    #You can see tools for text processing and filtering tools like grep.
     perl \
     make \
     gawk \
     sed \
     grep \
     \
-    # === Utilidades básicas de UNIX ===
-    # coreutils trae cat, ls, head, tail, sort, cut, tr, etc.
-    # findutils trae find y xargs.
-    # procps trae ps, top, kill (gestión de procesos).
-    # less = paginador para leer archivos largos.
-    # tree = muestra directorios como árbol.
-    # jq = procesa JSON desde la línea de comandos.
+    #Basic UNIX Utilities
+    # coreutils give you cat, ls, head, tail, sort, cut, tr, etc.
+    # findutils provides find y xargs.
+    # procps (process management) ps, top, kill.
+    # less = pager to read long files.
+    # tree = You can see the directories like a tree
+    # jq = Processes JSON from the command line.
     coreutils \
     findutils \
     procps \
@@ -83,15 +76,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tree \
     jq \
     \
-    # === Páginas de manual (comando `man`) ===
-    # La imagen base de Kali viene sin documentación para
-    # ahorrar espacio. La reinstalamos porque en el curso "man bash" o
-    # "man grep" es material de consulta obligada.
+    #Manual pages
+    #The base image of Kali dont includes information, for practical porpuses reinstall it.
     man-db \
     manpages \
     manpages-posix \
     \
-    # === Red básica y utilidades de descarga ===
+    #Basic web and download utilities
     curl \
     wget \
     git \
@@ -99,22 +90,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     locales \
     \
-    # === Linter (revisor automático de errores) para scripts Bash ===
+    #Linter tool for check and report error (like scripting in bash)
     shellcheck \
     \
-    # === Reconocimiento y escaneo de red ===
-    # nmap = el escáner de puertos más famoso.
-    # masscan = escaneo masivo de rangos grandes de IPs.
+    #Network recognition and scanning
+    #nmap = Popular port scanner.
+    #masscan = Massive scan of big range of IPs
     nmap \
     masscan \
     \
-    # === Captura y análisis de paquetes de red ===
-    # tcpdump = capturador clásico por terminal.
-    # tshark = versión de terminal de Wireshark.
+    #Network packet capture and analysis
+    #tcpdump = classic terminal-based capture tool.
+    #tshark = terminal-based version of Wireshark.
     tcpdump \
     tshark \
     \
-    # === Utilidades de red variadas ===
+    #Varied network utilities
     netcat-traditional \
     socat \
     dnsutils \
@@ -125,19 +116,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     net-tools \
     iputils-ping \
     \
-    # === Anonimato: Tor y similares ===
-    # tor = cliente de la red Tor.
-    # torsocks = "envoltorio" que hace pasar cualquier comando por Tor.
-    # proxychains4 = encadena múltiples proxies.
-    # obfs4proxy = ofusca el tráfico de Tor para evadir bloqueos.
+    #Tor and similars for anonymity
+    # tor = Tor web client
+    # torsocks = Wrapped for every command pass with Tor
+    # proxychains4 = Chain multiple proxies
+    # obfs4proxy = Obfuscates Tor traffic to evade blocking.
     tor \
     torsocks \
     proxychains4 \
     obfs4proxy \
     \
-    # === Cliente HTTP más legible que curl para aprender ===
+    #Command-line tool that simplifies interaction with HTTP servers and APIs.
     httpie \
     \
+
+#BLOCK F
  # --- Después de instalar, activamos el idioma español ---
  # sed busca "# es_ES.UTF-8" en /etc/locale.gen y le quita el "#" para
  # activar esa línea. Luego locale-gen compila los archivos de idioma.
