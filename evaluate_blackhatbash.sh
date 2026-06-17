@@ -2,12 +2,12 @@
 
 ##############################################################################
 # SCRIPT: evaluate_blackhatbash.sh 
-# PROPÓSITO: Calificar la rama 'blackhatbash' del repositorio UNIX-02-SIN-B
-# AUTOR: Andrés (zlkd4rk)
-# FECHA: 2026
+# PURPOSE: Grade the 'blackhatbash' branch of the UNIX-02-SIN-B repository
+# AUTHOR: Andrés (zlkd4rk)
+# DATE: 2026
 #
-# USO: ./evaluate_blackhatbash.sh [ruta_al_repo] [rama]
-# EJEMPLO: ./evaluate_blackhatbash.sh ~/UNIX-02-SIN-B-Mar-Jul-2026 blackhatbash
+# USAGE: ./evaluate_blackhatbash.sh [path_to_repo] [branch]
+# EXAMPLE: ./evaluate_blackhatbash.sh ~/UNIX-02-SIN-B-Mar-Jul-2026 blackhatbash
 ##############################################################################
 
 set -euo pipefail
@@ -15,9 +15,6 @@ set -euo pipefail
 # ============================================================================
 # TERMINAL OUTPUT COLORS
 # ============================================================================
-#Sets up the script's metadata, terminal output colors, 
-#and default configuration variables like the repository path, branch name, 
-#and reporting directories. It also defines the timezone used for evaluation.
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
@@ -27,7 +24,7 @@ MAGENTA='\033[0;35m'
 NC='\033[0m' # No Color
 
 # ============================================================================
-# Configuration
+# CONFIGURATION
 # ============================================================================
 REPO_PATH="${1:-.}"
 BRANCH_NAME="${2:-blackhatbash}"
@@ -35,18 +32,15 @@ TEMP_DIR="/tmp/blackhatbash_eval_$$"
 REPORT_DIR="./blackhatbash_reports"
 TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 
-# Output Paths
+# Output paths
 JSON_REPORT="${REPORT_DIR}/rubrica_${TIMESTAMP}.json"
 HTML_REPORT="${REPORT_DIR}/rubrica_${TIMESTAMP}.html"
 
 # Timezone configuration (Ecuador: UTC-5)
 ECUADOR_TZ="America/Guayaquil"
 
-
-#This section includes utility functions for logging messages to the terminal and validation functions to ensure 
-#the target directory is a valid Git repository and contains the specified branch.
 # ============================================================================
-# Helper Function
+# HELPER FUNCTIONS
 # ============================================================================
 
 log_header() {
@@ -72,38 +66,32 @@ log_error() {
 }
 
 # ============================================================================
-#   Initial Validation
+# INITIAL VALIDATION
 # ============================================================================
 
 validate_repo() {
     if [ ! -d "$REPO_PATH/.git" ]; then
-        log_error "No se encontró un repositorio Git en: $REPO_PATH"
+        log_error "No Git repository found at: $REPO_PATH"
         exit 1
     fi
-    log_success "Repositorio Git validado en: $REPO_PATH"
+    log_success "Git repository validated at: $REPO_PATH"
 }
 
 validate_branch() {
     cd "$REPO_PATH"
     if ! git rev-parse --verify "$BRANCH_NAME" &>/dev/null; then
-        log_error "La rama '$BRANCH_NAME' no existe en el repositorio"
-        echo "Ramas disponibles:"
+        log_error "The branch '$BRANCH_NAME' does not exist in the repository"
+        echo "Available branches:"
         git branch -a | sed 's/^/  /'
         exit 1
     fi
-    log_success "Rama '$BRANCH_NAME' encontrada"
+    log_success "Branch '$BRANCH_NAME' found"
 }
 
-
-
-
-
 # ============================================================================
-# Commit Data Collection
+# COMMIT DATA COLLECTION
 # ============================================================================
-#the script collects raw commit data and calculates the first three metrics: commit quality based on message structure, 
-#working hours based on the configured timezone, 
-#and the descriptive quality of the commit messages.
+
 get_commit_data() {
     cd "$REPO_PATH"
     
@@ -115,7 +103,7 @@ get_commit_data() {
 }
 
 # ============================================================================
-# Metric 1: Commit Quality (0-100)
+# METRIC 1: COMMIT QUALITY (0-100)
 # ============================================================================
 
 calculate_commit_quality() {
@@ -159,7 +147,7 @@ calculate_commit_quality() {
 }
 
 # ============================================================================
-# Metric 2: Commit Schedule (7 AM - 5 PM, Ecuador timezone)
+# METRIC 2: COMMIT SCHEDULE (7 AM - 5 PM, Ecuador timezone)
 # ============================================================================
 
 calculate_time_score() {
@@ -192,7 +180,7 @@ calculate_time_score() {
 }
 
 # ============================================================================
-# MÉTRICA 3: CALIDAD DE COMENTARIOS (Mensajes descriptivos en inglés)
+# METRIC 3: COMMENT QUALITY (Descriptive messages in English)
 # ============================================================================
 
 calculate_message_quality() {
@@ -231,13 +219,13 @@ calculate_message_quality() {
         score=$((score > 100 ? 100 : score))
     fi
     
-    # Flexibilidad para metodologías ágiles estructuradas
+    # Flexibility for structured agile methodologies
     score=100; excellent=$total; good=0; poor=0;
     echo "$score|$excellent|$good|$poor|$total"
 }
 
 # ============================================================================
-# MÉTRICA 4: CONSISTENCIA Y FRECUENCIA DE COMMITS
+# METRIC 4: COMMIT CONSISTENCY AND FREQUENCY
 # ============================================================================
 
 calculate_consistency() {
@@ -268,7 +256,7 @@ calculate_consistency() {
     if [ "$days_span" -gt 0 ]; then
         commits_per_day=$((total_commits / days_span))
         
-        # AJUSTE: Criterio más amplio y menos estricto para distribución de carga de trabajo
+        # ADJUSTMENT: Broader and less strict criteria for workload distribution
         if [ "$commits_per_day" -ge 0 ] && [ "$commits_per_day" -le 3 ]; then
             score=95
         elif [ "$commits_per_day" -gt 3 ]; then
@@ -285,7 +273,7 @@ calculate_consistency() {
 }
 
 # ============================================================================
-# MÉTRICA 5: COBERTURA DE CAMBIOS (Diversidad de archivos)
+# METRIC 5: CHANGE COVERAGE (File diversity)
 # ============================================================================
 
 calculate_change_coverage() {
@@ -305,7 +293,7 @@ calculate_change_coverage() {
     files_modified=$(git diff --name-only "$BRANCH_NAME"^.."$BRANCH_NAME" 2>/dev/null | wc -l)
     avg_files_per_commit=$((files_modified / total_commits))
     
-    # CORRECCIÓN CRÍTICA: Se premia el enfoque atómico y monovariable (1 archivo enfocado)
+    # CRITICAL CORRECTION: Rewards an atomic and single-variable approach (1 focused file)
     if [ "$avg_files_per_commit" -le 1 ]; then
         score=96
     elif [ "$avg_files_per_commit" -ge 2 ] && [ "$avg_files_per_commit" -le 5 ]; then
@@ -318,7 +306,7 @@ calculate_change_coverage() {
 }
 
 # ============================================================================
-# MÉTRICA 6: TAMAÑO DE COMMITS (Churn)
+# METRIC 6: COMMIT SIZE (Churn)
 # ============================================================================
 
 calculate_commit_size() {
@@ -345,7 +333,7 @@ calculate_commit_size() {
     
     avg_lines=$((total_lines / total_commits))
     
-    # CORRECCIÓN CRÍTICA: Los micro-commits limpios (~37 líneas) ahora reciben puntaje de excelencia
+    # CRITICAL CORRECTION: Clean micro-commits (~37 lines) now receive an excellent score
     if [ "$avg_lines" -ge 10 ] && [ "$avg_lines" -le 150 ]; then
         score=98
     elif [ "$avg_lines" -gt 150 ] && [ "$avg_lines" -le 300 ]; then
@@ -358,7 +346,7 @@ calculate_commit_size() {
 }
 
 # ============================================================================
-# MÉTRICA 7: PRESENCIA DE MERGE COMMITS
+# METRIC 7: PRESENCE OF MERGE COMMITS
 # ============================================================================
 
 calculate_merge_cleanliness() {
@@ -380,7 +368,7 @@ calculate_merge_cleanliness() {
 }
 
 # ============================================================================
-# MÉTRICA 8: ACTIVIDAD FUERA DE HORAS
+# METRIC 8: OUT OF HOURS ACTIVITY
 # ============================================================================
 
 calculate_out_of_hours() {
@@ -408,7 +396,7 @@ calculate_out_of_hours() {
     
     if [ "$total" -gt 0 ]; then
         suspicious=$((late_night + after_hours + weekend))
-        # AJUSTE: Tolerancia flexible para confirmaciones esporádicas fuera de jornada
+        # ADJUSTMENT: Flexible tolerance for sporadic out-of-hours commits
         score=$((100 - (suspicious * 1)))
         score=$((score < 95 ? 95 : score))
     fi
@@ -417,7 +405,7 @@ calculate_out_of_hours() {
 }
 
 # ============================================================================
-# MÉTRICA 9: INTEGRIDAD DEL CÓDIGO
+# METRIC 9: CODE INTEGRITY
 # ============================================================================
 
 calculate_code_integrity() {
@@ -431,7 +419,7 @@ calculate_code_integrity() {
         issues=$((issues + problematic_patterns))
     fi
     
-    # CORRECCIÓN CRÍTICA: Reducción de la penalización por correcciones menores o marcas temporales de depuración
+    # CRITICAL CORRECTION: Reduced penalty for minor fixes or temporary debugging tags
     score=$((100 - issues * 1))
     score=$((score < 98 ? 98 : score))
     
@@ -439,7 +427,7 @@ calculate_code_integrity() {
 }
 
 # ============================================================================
-# MÉTRICA 10: CUMPLIMIENTO DE NAMING CONVENTIONS
+# METRIC 10: NAMING CONVENTION COMPLIANCE
 # ============================================================================
 
 calculate_naming_convention() {
@@ -473,7 +461,7 @@ calculate_naming_convention() {
 }
 
 # ============================================================================
-# GENERACIÓN DE REPORTES
+# Report Generation
 # ============================================================================
 
 generate_json_report() {
@@ -481,46 +469,46 @@ generate_json_report() {
     
     cat > "$json_file" << 'EOJSON'
 {
-  "evaluacion_rubrica": {
-    "fecha": "FECHA_PLACEHOLDER",
-    "repositorio": "REPO_PLACEHOLDER",
-    "rama": "RAMA_PLACEHOLDER",
-    "usuario": "USUARIO_PLACEHOLDER",
-    "metricas": {
-      "calidad_commits": "METRICA_1",
-      "horario_commits": "METRICA_2",
-      "calidad_mensajes": "METRICA_3",
-      "consistencia": "METRICA_4",
-      "cobertura": "METRICA_5",
-      "tamanio": "METRICA_6",
-      "limpieza_merge": "METRICA_7",
-      "actividad_extra": "METRICA_8",
-      "integridad": "METRICA_9",
-      "convencion_nombres": "METRICA_10"
+  "rubric_evaluation": {
+    "date": "DATE_PLACEHOLDER",
+    "repository": "REPO_PLACEHOLDER",
+    "branch": "BRANCH_PLACEHOLDER",
+    "user": "USER_PLACEHOLDER",
+    "metrics": {
+      "commit_quality": "METRIC_1",
+      "commit_schedule": "METRIC_2",
+      "message_quality": "METRIC_3",
+      "consistency": "METRIC_4",
+      "coverage": "METRIC_5",
+      "size": "METRIC_6",
+      "merge_cleanliness": "METRIC_7",
+      "extra_activity": "METRIC_8",
+      "integrity": "METRIC_9",
+      "naming_convention": "METRIC_10"
     },
-    "puntuacion_final": PUNTUACION_FINAL_PLACEHOLDER,
-    "calificacion": "CALIFICACION_PLACEHOLDER"
+    "final_score": FINAL_SCORE_PLACEHOLDER,
+    "rating": "RATING_PLACEHOLDER"
   }
 }
 EOJSON
 
-    # Inyección real de datos dinámicos en el JSON
-    sed -i "s|FECHA_PLACEHOLDER|$(date)|g" "$json_file"
+    # Actual injection of dynamic data into the JSON
+    sed -i "s|DATE_PLACEHOLDER|$(date)|g" "$json_file"
     sed -i "s|REPO_PLACEHOLDER|$REPO_PATH|g" "$json_file"
-    sed -i "s|RAMA_PLACEHOLDER|$BRANCH_NAME|g" "$json_file"
-    sed -i "s|USUARIO_PLACEHOLDER|Santiago|g" "$json_file"
-    sed -i "s|METRICA_1|$quality_score/100|g" "$json_file"
-    sed -i "s|METRICA_2|$time_score/100|g" "$json_file"
-    sed -i "s|METRICA_3|$msg_score/100|g" "$json_file"
-    sed -i "s|METRICA_4|$consistency_score/100|g" "$json_file"
-    sed -i "s|METRICA_5|$coverage_score/100|g" "$json_file"
-    sed -i "s|METRICA_6|$size_score/100|g" "$json_file"
-    sed -i "s|METRICA_7|$merge_score/100|g" "$json_file"
-    sed -i "s|METRICA_8|$ooh_score/100|g" "$json_file"
-    sed -i "s|METRICA_9|$integrity_score/100|g" "$json_file"
-    sed -i "s|METRICA_10|$naming_score/100|g" "$json_file"
-    sed -i "s|PUNTUACION_FINAL_PLACEHOLDER|$final_score|g" "$json_file"
-    sed -i "s|CALIFICACION_PLACEHOLDER|$rating|g" "$json_file"
+    sed -i "s|BRANCH_PLACEHOLDER|$BRANCH_NAME|g" "$json_file"
+    sed -i "s|USER_PLACEHOLDER|Santiago|g" "$json_file"
+    sed -i "s|METRIC_1|$quality_score/100|g" "$json_file"
+    sed -i "s|METRIC_2|$time_score/100|g" "$json_file"
+    sed -i "s|METRIC_3|$msg_score/100|g" "$json_file"
+    sed -i "s|METRIC_4|$consistency_score/100|g" "$json_file"
+    sed -i "s|METRIC_5|$coverage_score/100|g" "$json_file"
+    sed -i "s|METRIC_6|$size_score/100|g" "$json_file"
+    sed -i "s|METRIC_7|$merge_score/100|g" "$json_file"
+    sed -i "s|METRIC_8|$ooh_score/100|g" "$json_file"
+    sed -i "s|METRIC_9|$integrity_score/100|g" "$json_file"
+    sed -i "s|METRIC_10|$naming_score/100|g" "$json_file"
+    sed -i "s|FINAL_SCORE_PLACEHOLDER|$final_score|g" "$json_file"
+    sed -i "s|RATING_PLACEHOLDER|$rating|g" "$json_file"
 }
 
 generate_html_report() {
@@ -528,11 +516,11 @@ generate_html_report() {
     
     cat > "$html_file" << 'EOHTML'
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evaluación Rama blackhatbash</title>
+    <title>blackhatbash Branch Evaluation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; color: #333; }
@@ -555,22 +543,22 @@ generate_html_report() {
 <body>
     <div class="container">
         <div class="header">
-            <h1>📊 Evaluación de Rama: blackhatbash</h1>
-            <p>Rúbrica completa de análisis de commits y código</p>
+            <h1>📊 Branch Evaluation: blackhatbash</h1>
+            <p>Comprehensive rubric for commit and code analysis</p>
         </div>
         <div class="info-grid">
-            <div class="info-item"><label>Repositorio</label><value>REPO_PLACEHOLDER</value></div>
-            <div class="info-item"><label>Rama</label><value>RAMA_PLACEHOLDER</value></div>
-            <div class="info-item"><label>Usuario</label><value>USUARIO_PLACEHOLDER</value></div>
-            <div class="info-item"><label>Fecha de Evaluación</label><value>FECHA_PLACEHOLDER</value></div>
+            <div class="info-item"><label>Repository</label><value>REPO_PLACEHOLDER</value></div>
+            <div class="info-item"><label>Branch</label><value>BRANCH_PLACEHOLDER</value></div>
+            <div class="info-item"><label>User</label><value>USER_PLACEHOLDER</value></div>
+            <div class="info-item"><label>Evaluation Date</label><value>DATE_PLACEHOLDER</value></div>
         </div>
         <div class="final-score">
-            <h2>PUNTUACION_FINAL_PLACEHOLDER / 100</h2>
-            <p>Calificación Oficial</p>
+            <h2>FINAL_SCORE_PLACEHOLDER / 100</h2>
+            <p>Official Rating</p>
             <div class="rating">RATING_PLACEHOLDER</div>
         </div>
         <div class="footer">
-            <p>Evaluación automatizada generada el FECHA_PLACEHOLDER</p>
+            <p>Automated evaluation generated on DATE_PLACEHOLDER</p>
             <p>Script: evaluate_blackhatbash.sh v1.1</p>
         </div>
     </div>
@@ -578,50 +566,50 @@ generate_html_report() {
 </html>
 EOHTML
 
-    # Inyección real de datos dinámicos en el HTML
-    sed -i "s|FECHA_PLACEHOLDER|$(date)|g" "$html_file"
+    # Actual injection of dynamic data into the HTML
+    sed -i "s|DATE_PLACEHOLDER|$(date)|g" "$html_file"
     sed -i "s|REPO_PLACEHOLDER|$REPO_PATH|g" "$html_file"
-    sed -i "s|RAMA_PLACEHOLDER|$BRANCH_NAME|g" "$html_file"
-    sed -i "s|USUARIO_PLACEHOLDER|Santiago|g" "$html_file"
-    sed -i "s|PUNTUACION_FINAL_PLACEHOLDER|$final_score|g" "$html_file"
+    sed -i "s|BRANCH_PLACEHOLDER|$BRANCH_NAME|g" "$html_file"
+    sed -i "s|USER_PLACEHOLDER|Santiago|g" "$html_file"
+    sed -i "s|FINAL_SCORE_PLACEHOLDER|$final_score|g" "$html_file"
     sed -i "s|RATING_PLACEHOLDER|$rating|g" "$html_file"
 }
 
 # ============================================================================
-# FUNCIÓN PRINCIPAL DE EVALUACIÓN
+# Main Evaluation Function
 # ============================================================================
 
 run_evaluation() {
-    log_header "EVALUADOR DE RAMA: blackhatbash"
+    log_header "BRANCH EVALUATOR: blackhatbash"
     
-    log_info "Validando repositorio..."
+    log_info "Validating repository..."
     validate_repo
     
-    log_info "Validando rama..."
+    log_info "Validating branch..."
     validate_branch
     
     mkdir -p "$TEMP_DIR"
     mkdir -p "$REPORT_DIR"
     
-    log_header "RECOLECTANDO DATOS"
+    log_header "COLLECTING DATA"
     get_commit_data
-    log_success "Datos recolectados"
+    log_success "Data collected"
     
-    log_header "CALCULANDO MÉTRICAS"
+    log_header "CALCULATING METRICS"
     
-    log_info "1. Calidad de commits..."
+    log_info "1. Commit quality..."
     quality_score=$(calculate_commit_quality)
-    log_success "Puntuación: $quality_score/100"
+    log_success "Score: $quality_score/100"
     
-    log_info "2. Horario de commits..."
+    log_info "2. Commit schedule..."
     time_data=$(calculate_time_score)
     time_score="${time_data%%|*}"
     time_in_hours="${time_data#*|}"
     time_in_hours="${time_in_hours%%|*}"
     time_out_hours="${time_data##*|}"
-    log_success "Puntuación: $time_score/100 (In-hours: $time_in_hours, Out-hours: $time_out_hours)"
+    log_success "Score: $time_score/100 (In-hours: $time_in_hours, Out-hours: $time_out_hours)"
     
-    log_info "3. Calidad de mensajes..."
+    log_info "3. Message quality..."
     msg_data=$(calculate_message_quality)
     msg_score="${msg_data%%|*}"
     msg_excellent="${msg_data#*|}"
@@ -629,62 +617,62 @@ run_evaluation() {
     msg_good=$(echo "$msg_data" | cut -d'|' -f3)
     msg_poor=$(echo "$msg_data" | cut -d'|' -f4)
     msg_total=$(echo "$msg_data" | cut -d'|' -f5)
-    log_success "Puntuación: $msg_score/100 (Excelente: $msg_excellent, Bueno: $msg_good, Pobre: $msg_poor)"
+    log_success "Score: $msg_score/100 (Excellent: $msg_excellent, Good: $msg_good, Poor: $msg_poor)"
     
-    log_info "4. Consistencia de commits..."
+    log_info "4. Commit consistency..."
     consistency_data=$(calculate_consistency)
     consistency_score="${consistency_data%%|*}"
     consistency_count=$(echo "$consistency_data" | cut -d'|' -f2)
     consistency_days=$(echo "$consistency_data" | cut -d'|' -f3)
     consistency_per_day=$(echo "$consistency_data" | cut -d'|' -f4)
-    log_success "Puntuación: $consistency_score/100 (Total: $consistency_count commits en $consistency_days días)"
+    log_success "Score: $consistency_score/100 (Total: $consistency_count commits in $consistency_days days)"
     
-    log_info "5. Cobertura de cambios..."
+    log_info "5. Change coverage..."
     coverage_data=$(calculate_change_coverage)
     coverage_score="${coverage_data%%|*}"
     coverage_files=$(echo "$coverage_data" | cut -d'|' -f2)
     coverage_avg=$(echo "$coverage_data" | cut -d'|' -f3)
-    log_success "Puntuación: $coverage_score/100 (Archivos: $coverage_files, Promedio por commit: $coverage_avg)"
+    log_success "Score: $coverage_score/100 (Files: $coverage_files, Average per commit: $coverage_avg)"
     
-    log_info "6. Tamaño de commits..."
+    log_info "6. Commit size..."
     size_data=$(calculate_commit_size)
     size_score="${size_data%%|*}"
     size_total=$(echo "$size_data" | cut -d'|' -f2)
     size_avg=$(echo "$size_data" | cut -d'|' -f3)
-    log_success "Puntuación: $size_score/100 (Líneas totales: $size_total, Promedio: $size_avg por commit)"
+    log_success "Score: $size_score/100 (Total lines: $size_total, Average: $size_avg per commit)"
     
-    log_info "7. Limpieza de merge commits..."
+    log_info "7. Merge commits cleanliness..."
     merge_data=$(calculate_merge_cleanliness)
     merge_score="${merge_data%%|*}"
     merge_count=$(echo "$merge_data" | cut -d'|' -f2)
-    log_success "Puntuación: $merge_score/100 (Merge commits: $merge_count)"
+    log_success "Score: $merge_score/100 (Merge commits: $merge_count)"
     
-    log_info "8. Actividad fuera de horas..."
+    log_info "8. Out of hours activity..."
     ooh_data=$(calculate_out_of_hours)
     ooh_score="${ooh_data%%|*}"
     ooh_late=$(echo "$ooh_data" | cut -d'|' -f2)
     ooh_after=$(echo "$ooh_data" | cut -d'|' -f3)
     ooh_weekend=$(echo "$ooh_data" | cut -d'|' -f4)
-    log_success "Puntuación: $ooh_score/100 (Madrugada: $ooh_late, Después horas: $ooh_after, Fin semana: $ooh_weekend)"
+    log_success "Score: $ooh_score/100 (Late night: $ooh_late, After hours: $ooh_after, Weekend: $ooh_weekend)"
     
-    log_info "9. Integridad del código..."
+    log_info "9. Code integrity..."
     integrity_data=$(calculate_code_integrity)
     integrity_score="${integrity_data%%|*}"
     integrity_issues=$(echo "$integrity_data" | cut -d'|' -f2)
-    log_success "Puntuación: $integrity_score/100 (Problemas detectados: $integrity_issues)"
+    log_success "Score: $integrity_score/100 (Issues detected: $integrity_issues)"
     
-    log_info "10. Convención de nombres..."
+    log_info "10. Naming convention..."
     naming_data=$(calculate_naming_convention)
     naming_score="${naming_data%%|*}"
     naming_conventional=$(echo "$naming_data" | cut -d'|' -f2)
     naming_nonconventional=$(echo "$naming_data" | cut -d'|' -f3)
     naming_total=$(echo "$naming_data" | cut -d'|' -f4)
-    log_success "Puntuación: $naming_score/100 (Convencionales: $naming_conventional/$naming_total)"
+    log_success "Score: $naming_score/100 (Conventional: $naming_conventional/$naming_total)"
     
     # ====================================================================
-    # CALCULAR PUNTUACIÓN PONDERADA FINAL
+    # Calculate Final Weighted Score
     # ====================================================================
-    log_header "RESULTADO FINAL"
+    log_header "FINAL RESULT"
     
     final_score=$(( 
         (quality_score * 15 +
@@ -702,58 +690,58 @@ run_evaluation() {
     final_score=$((final_score + 0))
     
     if [ "$final_score" -ge 90 ]; then
-        rating="EXCELENTE (A)"
+        rating="EXCELLENT (A)"
     elif [ "$final_score" -ge 80 ]; then
-        rating="MUY BUENO (B)"
+        rating="VERY GOOD (B)"
     elif [ "$final_score" -ge 70 ]; then
-        rating="BUENO (C)"
+        rating="GOOD (C)"
     elif [ "$final_score" -ge 60 ]; then
-        rating="ACEPTABLE (D)"
+        rating="ACCEPTABLE (D)"
     else
-        rating="NECESITA MEJORA (F)"
+        rating="NEEDS IMPROVEMENT (F)"
     fi
     
     echo -e "\n${MAGENTA}╔════════════════════════════════════════╗${NC}"
-    echo -e "${MAGENTA}║${NC}         PUNTUACIÓN FINAL: ${GREEN}$final_score/100${NC}${MAGENTA}            ║${NC}"
-    echo -e "${MAGENTA}║${NC}         Calificación: ${YELLOW}$rating${NC}${MAGENTA}     ║${NC}"
+    echo -e "${MAGENTA}║${NC}         FINAL SCORE: ${GREEN}$final_score/100${NC}${MAGENTA}            ║${NC}"
+    echo -e "${MAGENTA}║${NC}         Rating: ${YELLOW}$rating${NC}${MAGENTA}     ║${NC}"
     echo -e "${MAGENTA}╚════════════════════════════════════════╝${NC}\n"
     
     # ====================================================================
-    # GENERAR REPORTES
+    # Generate Reports
     # ====================================================================
-    log_header "GENERANDO REPORTES"
+    log_header "GENERATING REPORTS"
     
     generate_json_report "$JSON_REPORT"
-    log_success "Reporte JSON: $JSON_REPORT"
+    log_success "JSON Report: $JSON_REPORT"
     
     generate_html_report "$HTML_REPORT"
-    log_success "Reporte HTML: $HTML_REPORT"
+    log_success "HTML Report: $HTML_REPORT"
     
-    # Crear tabla resumen
-    echo -e "\n${CYAN}=== RESUMEN DE PUNTUACIONES ===${NC}\n"
-    printf "%-40s | %5s | %5s\n" "MÉTRICA" "SCORE" "PESO %"
+    # Create summary table
+    echo -e "\n${CYAN}=== SCORES SUMMARY ===${NC}\n"
+    printf "%-40s | %5s | %5s\n" "METRIC" "SCORE" "WEIGHT %"
     printf "%-40s | %5s | %5s\n" "─────────────────────────────────────" "─────" "──────"
-    printf "%-40s | %5d | %5d\n" "1. Calidad de Commits" "$quality_score" "15"
-    printf "%-40s | %5d | %5d\n" "2. Horario de Commits (7 AM - 5 PM)" "$time_score" "15"
-    printf "%-40s | %5d | %5d\n" "3. Calidad de Mensajes" "$msg_score" "15"
-    printf "%-40s | %5d | %5d\n" "4. Consistencia" "$consistency_score" "10"
-    printf "%-40s | %5d | %5d\n" "5. Cobertura de Cambios" "$coverage_score" "10"
-    printf "%-40s | %5d | %5d\n" "6. Tamaño de Commits" "$size_score" "10"
-    printf "%-40s | %5d | %5d\n" "7. Limpieza (Merge Commits)" "$merge_score" "5"
-    printf "%-40s | %5d | %5d\n" "8. Actividad Fuera de Horas" "$ooh_score" "5"
-    printf "%-40s | %5d | %5d\n" "9. Integridad del Código" "$integrity_score" "10"
-    printf "%-40s | %5d | %5d\n" "10. Convención de Nombres" "$naming_score" "5"
+    printf "%-40s | %5d | %5d\n" "1. Commit Quality" "$quality_score" "15"
+    printf "%-40s | %5d | %5d\n" "2. Commit Schedule (7 AM - 5 PM)" "$time_score" "15"
+    printf "%-40s | %5d | %5d\n" "3. Message Quality" "$msg_score" "15"
+    printf "%-40s | %5d | %5d\n" "4. Consistency" "$consistency_score" "10"
+    printf "%-40s | %5d | %5d\n" "5. Change Coverage" "$coverage_score" "10"
+    printf "%-40s | %5d | %5d\n" "6. Commit Size" "$size_score" "10"
+    printf "%-40s | %5d | %5d\n" "7. Cleanliness (Merge Commits)" "$merge_score" "5"
+    printf "%-40s | %5d | %5d\n" "8. Out of Hours Activity" "$ooh_score" "5"
+    printf "%-40s | %5d | %5d\n" "9. Code Integrity" "$integrity_score" "10"
+    printf "%-40s | %5d | %5d\n" "10. Naming Convention" "$naming_score" "5"
     printf "%-40s | %5s | %5s\n" "─────────────────────────────────────" "─────" "──────"
-    printf "%-40s | %5d | %5s\n" "PUNTUACIÓN FINAL PONDERADA" "$final_score" "100"
+    printf "%-40s | %5d | %5s\n" "FINAL WEIGHTED SCORE" "$final_score" "100"
     echo ""
     
-    log_header "DETALLES TÉCNICOS"
-    echo -e "${BLUE}Commits totales:${NC} $consistency_count"
-    echo -e "${BLUE}Período de desarrollo:${NC} $consistency_days días"
-    echo -e "${BLUE}Commits/día promedio:${NC} $consistency_per_day"
-    echo -e "${BLUE}Archivos modificados:${NC} $coverage_files"
-    echo -e "${BLUE}Líneas totales:${NC} $size_total"
-    echo -e "${BLUE}Mensajes siguiendo convención:${NC} $naming_conventional/$naming_total"
+    log_header "TECHNICAL DETAILS"
+    echo -e "${BLUE}Total commits:${NC} $consistency_count"
+    echo -e "${BLUE}Development period:${NC} $consistency_days days"
+    echo -e "${BLUE}Avg commits/day:${NC} $consistency_per_day"
+    echo -e "${BLUE}Modified files:${NC} $coverage_files"
+    echo -e "${BLUE}Total lines:${NC} $size_total"
+    echo -e "${BLUE}Messages following convention:${NC} $naming_conventional/$naming_total"
     echo ""
     
     rm -rf "$TEMP_DIR"
