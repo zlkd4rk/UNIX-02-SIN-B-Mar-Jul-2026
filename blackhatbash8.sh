@@ -23,3 +23,20 @@ sed '$d' log.txt >> newlogl.txt
 sed '5,7d' log.txt >> newlog57.txt
 sed -n '2,15 p' log.txt
 sed -i '1d' log.txt
+
+
+sleep 100&
+ps -ef | grep sleep
+# root        4033    1213  0 13:13 pts/0    00:00:00 sleep 100
+jobs
+#[1]+  Ejecutando                 sleep 100 &
+fg %1 #Move to the foreground the action with the jobs identifier
+#sleep 100
+
+sleep 100
+#ctrl+z
+#[1]+  Detenido                   sleep 100
+
+bg %!
+#[1]+ sleep 100 &
+
