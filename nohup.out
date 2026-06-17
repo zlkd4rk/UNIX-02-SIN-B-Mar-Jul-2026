@@ -1,0 +1,90 @@
+
+[0;36m========================================[0m
+[0;36mEVALUADOR DE RAMA: blackhatbash[0m
+[0;36m========================================[0m
+
+[0;34m[INFO][0m Validando repositorio...
+[0;32m[✓][0m Repositorio Git validado en: .
+[0;34m[INFO][0m Validando rama...
+[0;32m[✓][0m Rama 'blackhatbash' encontrada
+
+[0;36m========================================[0m
+[0;36mRECOLECTANDO DATOS[0m
+[0;36m========================================[0m
+
+[0;32m[✓][0m Datos recolectados
+
+[0;36m========================================[0m
+[0;36mCALCULANDO MÉTRICAS[0m
+[0;36m========================================[0m
+
+[0;34m[INFO][0m 1. Calidad de commits...
+[0;32m[✓][0m Puntuación: 100/100
+[0;34m[INFO][0m 2. Horario de commits...
+[0;32m[✓][0m Puntuación: 87/100 (In-hours: 69, Out-hours: 10)
+[0;34m[INFO][0m 3. Calidad de mensajes...
+[0;32m[✓][0m Puntuación: 100/100 (Excelente: 79, Bueno: 0, Pobre: 0)
+[0;34m[INFO][0m 4. Consistencia de commits...
+[0;32m[✓][0m Puntuación: 95/100 (Total: 79 commits en 91 días)
+[0;34m[INFO][0m 5. Cobertura de cambios...
+[0;32m[✓][0m Puntuación: 96/100 (Archivos: 1, Promedio por commit: 0)
+[0;34m[INFO][0m 6. Tamaño de commits...
+[0;32m[✓][0m Puntuación: 98/100 (Líneas totales: 4072, Promedio: 51 por commit)
+[0;34m[INFO][0m 7. Limpieza de merge commits...
+[0;32m[✓][0m Puntuación: 100/100 (Merge commits: 0)
+[0;34m[INFO][0m 8. Actividad fuera de horas...
+[0;32m[✓][0m Puntuación: 95/100 (Madrugada: 1, Después horas: 9, Fin semana: 0)
+[0;34m[INFO][0m 9. Integridad del código...
+./evaluate_blackhatbash.sh: línea 430: [: 0
+0: se esperaba un entero
+[0;32m[✓][0m Puntuación: 100/100 (Problemas detectados: 0)
+[0;34m[INFO][0m 10. Convención de nombres...
+[0;32m[✓][0m Puntuación: 100/100 (Convencionales: 0/79)
+
+[0;36m========================================[0m
+[0;36mRESULTADO FINAL[0m
+[0;36m========================================[0m
+
+
+[0;35m╔════════════════════════════════════════╗[0m
+[0;35m║[0m         PUNTUACIÓN FINAL: [0;32m96/100[0m[0;35m            ║[0m
+[0;35m║[0m         Calificación: [1;33mEXCELENTE (A)[0m[0;35m     ║[0m
+[0;35m╚════════════════════════════════════════╝[0m
+
+
+[0;36m========================================[0m
+[0;36mGENERANDO REPORTES[0m
+[0;36m========================================[0m
+
+[0;32m[✓][0m Reporte JSON: ./blackhatbash_reports/rubrica_20260617_132214.json
+[0;32m[✓][0m Reporte HTML: ./blackhatbash_reports/rubrica_20260617_132214.html
+
+[0;36m=== RESUMEN DE PUNTUACIONES ===[0m
+
+MÉTRICA                                 | SCORE | PESO %
+───────────────────────────────────── | ───── | ──────
+1. Calidad de Commits                    |   100 |    15
+2. Horario de Commits (7 AM - 5 PM)      |    87 |    15
+3. Calidad de Mensajes                   |   100 |    15
+4. Consistencia                          |    95 |    10
+5. Cobertura de Cambios                  |    96 |    10
+6. Tamaño de Commits                    |    98 |    10
+7. Limpieza (Merge Commits)              |   100 |     5
+8. Actividad Fuera de Horas              |    95 |     5
+9. Integridad del Código                |   100 |    10
+10. Convención de Nombres               |   100 |     5
+───────────────────────────────────── | ───── | ──────
+PUNTUACIÓN FINAL PONDERADA              |    96 |   100
+
+
+[0;36m========================================[0m
+[0;36mDETALLES TÉCNICOS[0m
+[0;36m========================================[0m
+
+[0;34mCommits totales:[0m 79
+[0;34mPeríodo de desarrollo:[0m 91 días
+[0;34mCommits/día promedio:[0m 0
+[0;34mArchivos modificados:[0m 1
+[0;34mLíneas totales:[0m 4072
+[0;34mMensajes siguiendo convención:[0m 0/79
+

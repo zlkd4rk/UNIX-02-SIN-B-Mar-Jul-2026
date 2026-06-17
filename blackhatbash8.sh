@@ -40,3 +40,5 @@ sleep 100
 bg %!
 #[1]+ sleep 100 &
 
+nohup ./evaluate_blackhatbash.sh & #Put in the background the proccess and the output go into a nohup.out
+
