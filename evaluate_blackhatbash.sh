@@ -115,7 +115,7 @@ get_commit_data() {
 }
 
 # ============================================================================
-# MÉTRICA 1: CALIDAD DE COMMITS (0-100)
+# Metric 1: Commit Quality (0-100)
 # ============================================================================
 
 calculate_commit_quality() {
@@ -153,13 +153,13 @@ calculate_commit_quality() {
         score=$((score > 100 ? 100 : score))
     fi
     
-    # Garantizar base óptima para mensajes claros
+    # Ensure an optimal base for clear messages
     [ "$score" -lt 95 ] && score=100
     echo "$score"
 }
 
 # ============================================================================
-# MÉTRICA 2: HORARIO DE COMMITS (7 AM - 5 PM, zona Ecuador)
+# Metric 2: Commit Schedule (7 AM - 5 PM, Ecuador timezone)
 # ============================================================================
 
 calculate_time_score() {
